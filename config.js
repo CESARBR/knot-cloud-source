@@ -46,14 +46,14 @@ module.exports = {
   mongo: {
     databaseUrl: process.env.MONGODB_URI
   },
-  port: parseInt(process.env.PORT) || 80,
+  port: parseInt(process.env.PORT) || 3000,
   tls: {
     sslPort: parseInt(process.env.SSL_PORT) || 443,
     cert: process.env.SSL_CERT,
     key: process.env.SSL_KEY
   },
   uuid: process.env.UUID,
-  token: process.env.TOKEN,
+  token: process.env.TOKEN || 'my_default_token',
   broadcastActivity: (process.env.BROADCAST_ACTIVITY || "false").toLowerCase() == "true",
   log: (process.env.USE_LOG || "true").toLowerCase() == "true",
   logToRedis: (process.env.USE_REDIS_LOG || "false").toLowerCase() == "true",
