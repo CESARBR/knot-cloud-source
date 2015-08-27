@@ -7,20 +7,24 @@ LITERAL_PLACEHOLDER = "0"
 parseRules = (rules) ->
   restrictions = rules.split /[\|&]/
   jsepInput = rules.replace /[^\|&]+/g, LITERAL_PLACEHOLDER
-  tree = jsep jsepInput
-  fillTreeRestrictions tree, restrictions
-  tree
+  try
+    tree = jsep jsepInput
+    fillTreeRestrictions tree, restrictions
+    tree
+  catch error
+    "Parse error"
 
 fillTreeRestrictions = (tree, restrictions) ->
-  if tree.left.type == "Literal"
-    fillLeafRestriction tree.left, restrictions.shift()
-  else
-    fillTreeRestrictions tree.left, restrictions
+  if tree.type == "BinaryExpression"
+    if tree.left.type == "Literal"
+      fillLeafRestriction tree.left, restrictions.shift()
+    else
+      fillTreeRestrictions tree.left, restrictions
 
-  if tree.right.type == "Literal"
-    fillLeafRestriction tree.right, restrictions.shift()
-  else
-    fillTreeRestrictions tree.right, restrictions
+    if tree.right.type == "Literal"
+      fillLeafRestriction tree.right, restrictions.shift()
+    else
+      fillTreeRestrictions tree.right, restrictions
 
 fillLeafRestriction = (leaf, restriction) ->
   leaf.type = "Restriction"
