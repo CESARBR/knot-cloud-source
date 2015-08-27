@@ -42,7 +42,8 @@
     "when": "~3.4.4",
     "winston": "^0.8.3",
     "winston-elasticsearch": "^0.1.1",
-    "winston-splunk": "^0.1.0"
+    "winston-splunk": "^0.1.0",
+    "jsep": "0.3.0"
   },
   "optionalDependencies": {
     "airbrake": "^0.3.8",
