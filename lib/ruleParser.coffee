@@ -1,40 +1,40 @@
 jsep = require "jsep"
-jsep.addBinaryOp("|", 1);
-jsep.addBinaryOp("&", 2);
+util = require "util"
 
+# Error messages
+PARAM_WITHOUT_VALUE_MESSAGE = "Syntax Error: Condition '%s' doesn't contains an '=' character."
+
+# Constants
 LITERAL_PLACEHOLDER = "0"
 
-parseRules = (rules) ->
+setupJsep = () ->
+  jsep.addBinaryOp("|", 1);
+  jsep.addBinaryOp("&", 2);
+
+parseRules = (rules, callback) ->
   restrictions = rules.split /[\|&]/
   jsepInput = rules.replace /[^\|&]+/g, LITERAL_PLACEHOLDER
   try
     tree = jsep jsepInput
     fillTreeRestrictions tree, restrictions
-    tree
+    callback null, tree
   catch error
-    "Parse error"
+    callback error, null
 
 fillTreeRestrictions = (tree, restrictions) ->
   if tree.type == "BinaryExpression"
-    if tree.left.type == "Literal"
-      fillLeafRestriction tree.left, restrictions.shift()
-    else
-      fillTreeRestrictions tree.left, restrictions
-
-    if tree.right.type == "Literal"
-      fillLeafRestriction tree.right, restrictions.shift()
-    else
-      fillTreeRestrictions tree.right, restrictions
+    fillTreeRestrictions tree.left, restrictions
+    fillTreeRestrictions tree.right, restrictions
+  else if tree.type == "Literal"
+    fillLeafRestriction tree, restrictions.shift()
 
 fillLeafRestriction = (leaf, restriction) ->
   leaf.type = "Restriction"
-
-  splittedRestriction = restriction.split "="
-
-  leaf.param = splittedRestriction[0]
-  leaf.value = splittedRestriction[1]
-
+  [leaf.param, leaf.value] = restriction.split "="
+  throw new Error util.format PARAM_WITHOUT_VALUE_MESSAGE, restriction unless leaf.param? and leaf.value?
   delete leaf.raw
+
+setupJsep()
 
 module.exports =
   parse: parseRules
