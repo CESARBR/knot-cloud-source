@@ -1,6 +1,7 @@
 _ = require "lodash"
 util = require "util"
 moment = require "moment" # Library to deal with time
+parser = require './ruleParser'
 
 # Error messages
 UNKNOWN_OPERATOR_ERROR = "Evaluation Error: Unknown operator '%s'."
@@ -31,7 +32,7 @@ restrictions =
 		return _.includes days, moment().format("ddd").toLowerCase()
 	date : (value) ->
 		throw new Error util.format INVALID_ARGS_FORMAT, DATE_ARGS_FORMAT unless \
-				value.match /^\s*\d{1,2}(?:\s*\/\s*\d{1,2}(?:\s*\/\s*\d{1,4})?)?(?:\s*-\s*\d{1,2}(?:\s*\/\s*\d{1,2}(?:\s*\/\s*\d{1,4})?)?)?\s*$/
+				value.match /^\s*(?:\d{1,2}(?:\s*\/\s*\d{1,2}(?:\s*\/\s*\d{1,4})?)?|null)(?:\s*-\s*(?:\d{1,2}(?:\s*\/\s*\d{1,2}(?:\s*\/\s*\d{1,4})?)?|null))?\s*$/
 		[fromDate, toDate] = value.split "-"
 		toDate ?= fromDate
 		fromDate = "01/01" if fromDate == "null" # an aways true minimum date: the first day of the year
@@ -61,6 +62,8 @@ recursive_evaluate = (condition) ->
 			return restrictions[condition.param] condition.value
 		else
 			throw new Error util.format UNKNOWN_PARAMETER_ERROR, condition.param
+	else if condition.type == "Compound"
+		return true
 	else
 		throw new Error util.format UNKNOWN_TYPE_ERROR, condition.type
 
@@ -71,5 +74,10 @@ evaluate = (condition, callback) ->
 	catch error
 		callback error, null
 
+parseAndEvaluate = (condition, callback) ->
+	parser.parse condition, (e, r) ->
+		if e? then callback e, null else evaluate r, callback
+
 module.exports = 
 	evaluate : evaluate
+	parseAndEvaluate : parseAndEvaluate
