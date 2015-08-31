@@ -1,3 +1,4 @@
+_ = require "lodash"
 jsep = require "jsep"
 util = require "util"
 
@@ -30,7 +31,7 @@ fillTreeRestrictions = (tree, restrictions) ->
 
 fillLeafRestriction = (leaf, restriction) ->
   leaf.type = "Restriction"
-  [leaf.param, leaf.value] = restriction.split "="
+  [leaf.param, leaf.value] = _.map restriction.split("="), (str) -> str.trim()
   throw new Error util.format PARAM_WITHOUT_VALUE_MESSAGE, restriction unless leaf.param? and leaf.value?
   delete leaf.raw
 
