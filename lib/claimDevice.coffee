@@ -20,8 +20,8 @@ module.exports = (fromDevice, data, callback=_.noop, dependencies={}) ->
       if !_.isArray device.configureWhitelist
         device.configureWhitelist = []
 
-      device.discoverWhitelist.push fromDevice.uuid
-      device.configureWhitelist.push fromDevice.uuid
+      device.discoverWhitelist.push {uuid:fromDevice.uuid, rule:''} #'' = no restrictions
+      device.configureWhitelist.push {uuid:fromDevice.uuid, rule:''} #'' = no restrictions
       device.owner = fromDevice.uuid
 
       oldUpdateDevice data.uuid, device, callback
