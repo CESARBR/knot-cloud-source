@@ -16,11 +16,7 @@ DATE_ARGS_FORMAT = "'[month/]day[/year][-[month/]day[/year]]'; a) Year must have
 DAY_ARGS_FORMAT = "'week_day[, another_week_day[, ...]]'; each week_day may be one of [sun, mon, tue, wed, thu, fri, sat], case insensitive."
 
 # Receives a generic string date and transforms it to a moment object.
-# Parameter str is expected to be a string that representes a date in one of the bellow formats:
-# > "DD" for a specific day of month. The month and year of the moment object are filled with the current month and year. Ex: "26" for this month's 26th day.
-# > "MM/DD" for a specific date of a month. The year of the moment object are filled with the current year. Ex: "04/26" for the date April 26th of the current year.
-# > "MM/DD/YYYY" for a specific date. Ex: "04/26/1991" for the date April 26th of 1991.
-# This function will throw  an error if the date argument is invalid. Ex: "2/29/2015" or "13/38".
+# Parameter 'str' must be one of the formats: "DD", "MM/DD" or "MM/DD/YYYY.
 strToMomentDate = (str) ->
 	result =
 		switch (str.match(/\//g) || []).length
@@ -30,14 +26,10 @@ strToMomentDate = (str) ->
 	throw new Error util.format INVALID_DATE, str unless result.isValid()
 
 # A map of the functions that evaluate each specific parameter in a condition to be evaluated.
-# Each of these functions receives a single string parameter with the condition to be evaluated and
-# returns a boolean value indicatin the result of the evaluation.
-# They may also throw an Error object if the 'value' argument is malformed.
+# Each of these functions must receive only a string parameter and return a boolean.
 restrictions =
 
 	# Validates if the current time is withing a given range.
-	# Expected format for 'value' is 'hh:mm-hh:mm'
-	# Ex: "07:0-12:00"
 	time : (value) ->
 		value = value.replace /\s*/g, ""
 		throw new Error util.format INVALID_ARGS_FORMAT, TIME_ARGS_FORMAT unless \
@@ -50,10 +42,6 @@ restrictions =
 		return result
 
 	# Validates if today is a specific day in the week.
-	# Expected format for 'value' is any number of week days separated by comma.
-	# Each week day may be one of [sun, mon, tue, wed, thu, fri, sat], case insensitive.
-	# Alternatively this method accepts the full name of the a day.
-	# Ex: "mon, wed, fri" or "Monday, Wednesday, Saturday"
 	day : (value) ->
 		value = value.replace /\s*/g, ""
 		throw new Error util.format INVALID_ARGS_FORMAT, DAY_ARGS_FORMAT unless \
@@ -63,20 +51,6 @@ restrictions =
 		return _.includes days, moment().format("ddd").toLowerCase()
 
 	# Validates if today is a specific date or within a range of two dates.
-	# Expected format for 'value' is versatile enought to support a single date or
-	# a range of two dates separated by a hyphen.
-	# Each date can have a single number specifying a date of any month; or
-	# Date and month, specifying a date of a month for each year; or
-	# A full date with day, month and year; or
-	# The word 'null', specifying no minimum or maximum limit for the range.
-	# Examples:
-	# > "5" will be true for each 5th day of any month.
-	# > "01/01" will be true for January 1st of each year.
-	# > "7/12/2015" will be true only for July 12th of 2015.
-	# > "02/15/2015-03/10/2015" will be true for this specific period only.
-	# > "4/1-4/30" will be true for April 1st to April 30th of any year.
-	# > "10/1/2015-null" will be true beginning from October 1st of 2015 and so on.
-	# > "null-10/1/2015" will be true until October 1st of 2015.
 	date : (value) ->
 		value = value.replace /\s*/g, ""
 		throw new Error util.format INVALID_ARGS_FORMAT, DATE_ARGS_FORMAT unless \
@@ -120,12 +94,8 @@ recursive_evaluate = (condition) ->
 	else
 		throw new Error util.format UNKNOWN_TYPE_ERROR, condition.type
 
-# Evaluates a condition tree and call the callback for the result.
-# Paramter 'condition' is the expression to be evaluated. It should be already parsed to a tree
-# format using ruleParser.coffee.
-# Paratemer 'callback' must be a function with two parameters: (error, result)
-# 'error' is a possible error found while evaluating the expression or null if none occurs.
-# 'result' is a boolean true or false for the result of the evaluation or null if an error occured.
+# Evaluates a condition received and call the callback for the result.
+# The 'condition' must be a tree object parsed with 'ruleParser.coffee'
 evaluate = (condition, callback) ->
 	try
 		result = recursive_evaluate condition
@@ -134,9 +104,6 @@ evaluate = (condition, callback) ->
 		callback error, null
 
 # Convenient function that accepts a condition in string format and internally calls the ruleParser.
-# The 'condition' parameter is expected to be in the same format as expected for the 'parse'
-# function of the ruleParser.
-# The callback is expected to be in the same format as expected for the 'evaluate' function.
 parseAndEvaluate = (condition, callback) ->
 	parser.parse condition, (e, r) ->
 		if e? then callback e, null else evaluate r, callback

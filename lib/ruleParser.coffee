@@ -14,9 +14,6 @@ setupJsep = () ->
 
 # Parses a restriction from the string format stored in the whitelists of the
 # devices to a tree that will be used by the ruleInterpreter.
-# Rules are expected to follow the format:
-# parameter=value&parameter=value|parameter=value
-# The return will be a tree object representing the expression.
 parseRules = (rules, callback) ->
   restrictions = rules.split /[\|&]/
   jsepInput = rules.replace /[^\|&]+/g, LITERAL_PLACEHOLDER
@@ -27,6 +24,9 @@ parseRules = (rules, callback) ->
   catch error
     callback error, null
 
+# Internal function used to adapt the tree that the jsep library created to the format expected
+# by the interpreter. This is a recursive function that iterates over the tree and calls
+# fillTreeRestrictions function for each leaf node found.
 fillTreeRestrictions = (tree, restrictions) ->
   if tree.type == "BinaryExpression"
     fillTreeRestrictions tree.left, restrictions
@@ -34,6 +34,7 @@ fillTreeRestrictions = (tree, restrictions) ->
   else if tree.type == "Literal"
     fillLeafRestriction tree, restrictions.shift()
 
+# Changes a leaf node to the format expected by the interpreter.
 fillLeafRestriction = (leaf, restriction) ->
   leaf.type = "Restriction"
   [leaf.param, leaf.value] = _.map restriction.split("="), (str) -> str.trim()
