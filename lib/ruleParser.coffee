@@ -12,6 +12,11 @@ setupJsep = () ->
   jsep.addBinaryOp("|", 1);
   jsep.addBinaryOp("&", 2);
 
+# Parses a restriction from the string format stored in the whitelists of the
+# devices to a tree that will be used by the ruleInterpreter.
+# Rules are expected to follow the format:
+# parameter=value&parameter=value|parameter=value
+# The return will be a tree object representing the expression.
 parseRules = (rules, callback) ->
   restrictions = rules.split /[\|&]/
   jsepInput = rules.replace /[^\|&]+/g, LITERAL_PLACEHOLDER
