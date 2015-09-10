@@ -15,6 +15,7 @@ setupJsep = () ->
 # Parses a restriction from the string format stored in the whitelists of the
 # devices to a tree that will be used by the ruleInterpreter.
 parseRules = (rules, callback) ->
+  rules = rules.trim()
   restrictions = rules.split /[\|&]/
   jsepInput = rules.replace /[^\|&]+/g, LITERAL_PLACEHOLDER
   try
