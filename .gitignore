@@ -17,3 +17,6 @@ v8.log
 coverage
 .idea
 meshblu.json
+
+# Vagrant folder/files
+.vagrant
