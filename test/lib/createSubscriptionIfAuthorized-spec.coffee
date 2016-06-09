@@ -18,7 +18,15 @@ describe 'createSubscriptionIfAuthorized', ->
 
     it 'should yield an error', ->
       expect(@error).to.be.an.instanceOf Error
-      expect(@error.message).to.deep.equal 'Type must be one of ["event"]'
+      expect(@error.message).to.deep.equal 'Type must be one of ["broadcast", "config", "received", "sent"]'
+
+  describe 'when called with an valid type', ->
+    beforeEach (done) ->
+      storeError = (@error) => done()
+      @sut {}, {type: 'broadcast'}, storeError
+
+    it 'should yield not an error', ->
+      expect(@error).not.to.be.an.instanceOf Error
 
   describe 'when we have one open device and one closed device', ->
     beforeEach (done) ->
@@ -32,9 +40,9 @@ describe 'createSubscriptionIfAuthorized', ->
     describe 'when the open device creates a subscription from itself to the closed device', ->
       beforeEach (done) ->
         params = {
-          uuid: @open_device.uuid
-          targetUuid: @closed_device.uuid
-          type: 'event'
+          subscriberUuid: @open_device.uuid
+          emitterUuid: @closed_device.uuid
+          type: 'broadcast'
         }
 
         @dependencies.getDevice = sinon.stub().yields null, @open_device
@@ -51,15 +59,15 @@ describe 'createSubscriptionIfAuthorized', ->
         @database.subscriptions.findOne {}, (error, subscription) =>
           return done error if error?
           subscription = _.omit subscription, '_id'
-          expect(subscription).to.deep.equal subscriberUuid: @open_device.uuid, emitterUuid: @closed_device.uuid, type: 'event'
+          expect(subscription).to.deep.equal subscriberUuid: @open_device.uuid, emitterUuid: @closed_device.uuid, type: 'broadcast'
           done()
 
       describe 'if we call it again', ->
         beforeEach (done) ->
           params = {
-            uuid: @open_device.uuid
-            targetUuid: @closed_device.uuid
-            type: 'event'
+            subscriberUuid: @open_device.uuid
+            emitterUuid: @closed_device.uuid
+            type: 'broadcast'
           }
 
           @dependencies.getDevice = sinon.stub().yields null, @open_device
@@ -77,9 +85,9 @@ describe 'createSubscriptionIfAuthorized', ->
         @other_device = {uuid: 'uuid3'}
 
         params = {
-          uuid: @closed_device.uuid
-          targetUuid: @open_device.uuid
-          type: 'event'
+          subscriberUuid: @closed_device.uuid
+          emitterUuid: @open_device.uuid
+          type: 'broadcast'
         }
 
         @dependencies.getDevice = sinon.stub().yields null, @closed_device

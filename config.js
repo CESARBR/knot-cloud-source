@@ -1,5 +1,8 @@
 var _ = require('lodash');
 var winston = require('winston');
+var privateKey = undefined;
+var publicKey = undefined;
+var aliasServerUri = undefined;
 
 var setupEventLoggers = function() {
   var loggers = _((process.env.LOGGERS || '').split(','));
@@ -40,6 +43,16 @@ var setupEventLoggers = function() {
   }
 
   return eventLoggers;
+}
+
+if (process.env.PRIVATE_KEY_BASE64 && process.env.PRIVATE_KEY_BASE64 !== '') {
+  privateKey = new Buffer(process.env.PRIVATE_KEY_BASE64, 'base64').toString('utf8')
+}
+if (process.env.PUBLIC_KEY_BASE64 && process.env.PUBLIC_KEY_BASE64 !== '') {
+  publicKey = new Buffer(process.env.PUBLIC_KEY_BASE64, 'base64').toString('utf8')
+}
+if (process.env.ALIAS_SERVER_URI && process.env.ALIAS_SERVER_URI !== '') {
+  aliasServerUri = process.env.ALIAS_SERVER_URI
 }
 
 module.exports = {
@@ -101,6 +114,9 @@ module.exports = {
   yo: {
     token: process.env.YO_TOKEN
   },
+  aliasServer: {
+    uri: aliasServerUri
+  },
   skynet_override_token: process.env.OVERRIDE_TOKEN,
   useProxyProtocol: (process.env.USE_PROXY_PROTOCOL || "false").toLowerCase() == "true"
    ,
@@ -113,5 +129,7 @@ module.exports = {
  messageBus: {
    port: parseInt(process.env.MESSAGE_BUS_PORT || 7777)
  },
- preservedDeviceProperties: ['geo', 'ipAddress', 'lastOnline', 'onlineSince', 'owner', 'timestamp']
+ preservedDeviceProperties: ['geo', 'ipAddress', 'lastOnline', 'onlineSince', 'owner', 'timestamp'],
+ privateKey: privateKey,
+ publicKey: publicKey
 };

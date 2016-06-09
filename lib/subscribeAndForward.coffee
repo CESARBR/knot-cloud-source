@@ -17,6 +17,7 @@ connectMessageIO = (response, payloadOnly=false) ->
   readStream = new Readable
   readStream._read = _.noop
   readStream.pipe response
+
   messageIOClient.on 'message', (message) ->
     debug 'onMessage', message
     if payloadOnly
@@ -24,7 +25,9 @@ connectMessageIO = (response, payloadOnly=false) ->
 
     readStream.push JSON.stringify(message) + '\n'
 
-  messageIOClient.start()
+  response.on 'close', ->
+    messageIOClient.close()
+
   return messageIOClient
 
 subscribeAndForward = (askingDevice, response, uuid, token, requestedSubscriptionTypes, payloadOnly, topics) ->
@@ -52,8 +55,11 @@ subscribeAndForward = (askingDevice, response, uuid, token, requestedSubscriptio
           authorizedSubscriptionTypes.push 'broadcast'
           authorizedSubscriptionTypes.push 'received'
           authorizedSubscriptionTypes.push 'sent'
+          authorizedSubscriptionTypes.push 'config'
+          authorizedSubscriptionTypes.push 'data'
 
         requestedSubscriptionTypes ?= authorizedSubscriptionTypes
+        requestedSubscriptionTypes = _.union requestedSubscriptionTypes, ['config', 'data']
         subscriptionTypes = _.intersection requestedSubscriptionTypes, authorizedSubscriptionTypes
 
         messageIOClient = connectMessageIO(response, payloadOnly)

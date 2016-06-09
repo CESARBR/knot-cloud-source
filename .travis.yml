@@ -8,58 +8,14 @@ node_js:
 - '0.10'
 services:
 - mongodb
-notifications:
-  slack:
-    secure: DYeEeHEW/ElN9XkUJzY0fyG+cuLKz7nuvRg5bK7QGoWs/8bcGxiIkPiJsSGQ0NZbN9jBGg8vfTUtKJJZjnYgH1C+pfFMU+QOmFTPYHa320vunoXXFCaRdRboZMfoCx6zF2fMG1dDHmsRHJy4NPb+mRrqCb1ED6lIToKiJybCzb4=
+- redis
 env:
+  global:
+  - REDIS_HOST=localhost
+  - REDIS_PORT=6379
   matrix:
   - USE_MONGO=true
   - USE_MONGO=false
-  global:
-  - AWS_ACCESS_KEY_ID=AKIAJH2D5IPIRHYJT5IA
-  - DOCKER_USERNAME=octoblu
-  - DEPLOY_APPLICATION_NAME=meshblu
-  - DEPLOY_REGION=us-west-2
-  - DEPLOY_BUCKET=octoblu-deploy
-  - DEPLOYMENT_GROUP=master
-  - DEPLOY_KEY=meshblu/meshblu-$TRAVIS_COMMIT.zip
-  - MONGODB_URI=172.31.33.28,172.31.38.108:27017,172.31.32.97:27017/meshblu
-  - PORT=80
-  - BROADCAST_ACTIVITY=true
-  - USE_REDIS_LOG=false
-  - ELASTIC_SEARCH_HOST=es.octoblu.com
-  - RATE_LIMITS_MESSAGE=20
-  - RATE_LIMITS_DATA=20
-  - RATE_LIMITS_CONNECTION=6
-  - RATE_LIMITS_QUERY=20
-  - RATE_LIMITS_WHOAMI=20
-  - RATE_LIMITS_UNTHROTTLED_IPS=127.0.0.1
-  - REDIS_HOST=meshblu-redis.csy8op.0001.usw2.cache.amazonaws.com
-  - REDIS_PORT=6379
-  - COAP_PORT=5683
-  - COAP_HOST=172.31.34.201
-  - MQTT_DATABASE_URI=172.31.33.28,172.31.38.108:27017,172.31.32.97:27017/meshblu
-  - MQTT_PORT=1883
-  - USE_PROXY_PROTOCOL=TRUE
-  - USE_NEWRELIC=false
-  - USE_LOG=false
-  - LOGGERS=elasticsearch,splunk
-  - ELASTIC_SEARCH_PORT=80
-  - USE_APP_DYNAMICS=false
-  - secure: D7s+tRX1Ro5TS1lJIlKC35/o5HFEGjSIwCwdYvUI5JzrHNnVNGFWnXvy2N5A3+MgVgSYmVeujaA+b76i/BS6+7Bx3PvmsNw4yPihTnrv8WrrmDs5YahfOm4uwL6puTDG/oxkD2FbZBVbptMGoAdPzuV8sPU3KDgH0JlXn/1si4s=
-  - secure: aCIa1F9YnUzXPsO4PwsJwafkBe7fK6sE40u8s3ryON/P16eSWcCRyzeoAo/9lKQvDp84OXprsAhpSEjZnx/PkvsbikXAi3H/IVTEFpP0zrGTx5pquKWlcKU5ddAum1H7FsBnznEeP81He4eD/jKeF4UPKl+ThlGEATvNd8YyWRQ=
-  - secure: Jhu19fqz4N+qnDWvg5IdlLIE2nIhWNvSzpM5G3RREVL0r7K4vUZkKTJrYqpBRDXq5607LcMNAqXt//XY0aQGoe83E6i6/a/Iaf1ZLVeRI5HF6p9kZLGt6YR/Nt/18RtzA1R5tP64ZFnjkIK9oxdQLInEq0U6Pqi3ff5SU2uMAq4=
-  - secure: KuDk8s+d9jT0a9OwaP7O+iLxSPob97q+16hr+N2s2mWEkJ/urNz/lAVBwmRQtXaSaxsfBC49iWPWDDKEjQYKc90eZ9Q3u2i21+qXuYAKoJ86xB99uJLXkf7xP2Cq/3gimFe26baJ48e7AO0htg7nsXe9yi5cKU1F2hTsvVZ5XXU=
-  - secure: JERy4H6YAjKVFFz0nu2V0h6aATO9Z2oFWRCsAhnTbTrlQ154qnvo2mnvFtc2rFqP04n9yt200rn5syksuia+vGGeQvud8kaLtgY+jUhBTWkGYbNZ8syoHVqqhAJmy3P7Pca7IAX1Z9FjiFTPEK3LI/0YyUjLZMJdG0rJl2HOnyU=
-  - secure: QTcDN1RybjBR4rZMj82i0WU2bcTL5OgP5gFR0Tn/nw7IIXPvpd6IoF0R+xk1qrfIS5lFC0j6ACC9M44N48GOPdvn7GXXs/OMCdYzlXhQGIsXu7Uk1ICw0SIPBjsDxpBiZPpD1J6gQpwzhvE+8fI9pEC7KlZcB3UCZV2ig7vLfos=
-  - secure: YVY+HWh/PcT0r4O/vxZ1zY+IRjIbt60YPEmSEkxH1v4viqCNd4PdP1n5XI+p5PFj4jikpRCkYFyLISBwghzb9rH9Abi0kST+YS0c/V8M7QWInTsd1gA+7F+aQP+TvpViZHqzlN/5FaZae/hV6DiS6wEDrG20+TW7KKXI2rSK8NY=
-  - secure: W9CoX+86p4NRahCU/ZZWpBK3ZW457w982FWWG+cu6YX6hNq9UJLTmgfuBS5QeLiP72cFHYz3jizlJj52vXj2/tTZI5ew/VAt1xmyfvufnANH2R5kCk4rt+LABALGdNp0Bkw1d6lIBG6KkCEjKRjy9mvJbCQG8D4d94MMgJBA1dM=
-  - secure: elHltP7kScSLG2NIMT9LZr3O+4nM81CaJSAm+fEcXMM1Y8g6RhjFaKpkGUT7PGolGmhWAEg8cwueAt8gKdmW6dsCfbKRifx/8qbrgPtzijDB5KZ7ztXomH3AsHlhtR8zDlz1MV1gQmucsSR8/KAj/o8/ZtGvQ5bnEU2HSjNqOr4=
-  - secure: iQ13OuCfEPAuQXGD+9aTb7/0rdb6D6OmegbIbW9E5pTC4jkvFvwZA4UHDSxsl+Sc+Tx3HrfkERhQGIKJwz1e2+t3TDt946JRFZcegVJjSpTXI1/ymOyH35kLFwvBTDRDSGjmPHEi55VhKcQoInSarydw4Y0cyBmD836Wr5KaTVI=
-  - secure: B7B1+Msz6fZxWJ3cPsEg9JPvqksmdAs0jgctfs+SPCg102KhEPppPIFMU88OfYatiJZJ/wgK+ElO9H8FMZhe+aVA/aHvWQkIjI8rVmS72Zio0qEIIMlWdWQ1uECKYhpBwHNWnCBjQSse7sj/YPFFlnkpijrFXO2vhQxCsTNGwGQ=
-  - secure: CgGwQU3frcUfL3XILqKH9rW1pGJA6gXmtnC0ezGRRjTkBzBWLgv/Eannr/eeBjcKbrdCrZEomLVGj7YTaaF9wCt6ofv7PQaoSwt7ceNxXMtYc0FNiKtBuaCWobvjZUJikQUe9imgt0bcTu6A089oVc7alnDUdou1kNsAbwnCobw=
-  - secure: HEE0y7f6x0qGU2vC7XwZAALVFP4a46Wey+wWenNWLJQv+zOuJUClFpysmVxBQTiGp+jt43k/RUBve607ZSc004SlTpIkalbGEVh7VnX8V6Gpt5xIqXC66Td0Y5MsCaJ1Gwqa5X6/sqNWWx3mAzX5eYbLkSlfq6iwxjxYUgWlQyI=
-  - secure: ZZKdEw+Jkoa598tjColeqtmOSr9XgcpjMR47mFum5xp1Dt080/tAzdVITmtXOyHvUdOsS+4kDSYzZljXCvAiwAelxQYdXc/ohks9qYJB67BbaoOhEsrxRvAmkLi8dcZKfrVZlunazsbzWYd5AbDSa1RGXBzD+rNGnSUPBq6FS3g=
 after_success:
 - .kubernetes/travis_after_success
 deploy:
@@ -69,21 +25,21 @@ deploy:
     secure: "PWUGkix9QPeOVdeEKwXM1DioZsxOD7YXLjcMNm4yghyDwWtkPIn5b98Fay5A8CfiUjngjviUb63X2KhqYE/kglWETp7BsbSzOhgDqv8qbnsK4MVtzk30fphX+FcVo9RSd37G6S3cT58DnJ9CtK6Z+Hp/44U59w2AXdoRr3i8/Ys="
   app-id: e1883763-9db4-432f-900a-628dd84aceaa
   on:
-    branch: master
+    branch: production
     condition: $USE_MONGO = true
 - provider: opsworks
   access_key_id: AKIAJH2D5IPIRHYJT5IA
   secret_access_key: *1
   app-id: 7b21bb86-93bb-4a2b-b482-7a8a3ab4a23b
   on:
-    branch: master
+    branch: production
     condition: $USE_MONGO = true
 - provider: opsworks
   access_key_id: AKIAJH2D5IPIRHYJT5IA
   secret_access_key: *1
   app-id: c9b4255f-bc9e-4368-a998-a26ea9ac4f7f
   on:
-    branch: master
+    branch: production
     condition: $USE_MONGO = true
 - provider: opsworks
   access_key_id: AKIAJH2D5IPIRHYJT5IA
@@ -99,10 +55,21 @@ deploy:
   on:
     branch: staging
     condition: $USE_MONGO = true
+- provider: npm
+  email: serveradmin@octoblu.com
+  api_key:
+    secure: "VZ8QsaPZEWhRaEQM7Az6p8UcKzG2Ew7BF4tuZe2pD56zeV0orr9Fn8i9wz4NAc1DB0fW0LaKAw3qCWOJ0gK6uL0zzRE4+faQERIsRKef6XqOteKbvb9oNffWMBCR1N4FNEK2LVIkmzkMcAPIhHHkmvWxjjZVuMGY5PJ+Oo1ZUw0="
+  on:
+    tags: true
+    branches: true
 addons:
   code_climate:
     repo_token: 8e3f39fe338fe8465f0400555fcbf8a2a3293f9c586b64588e8ce198e64bda58
 before_install:
-  - npm install -g npm
+- npm install -g npm
+before_script:
+- npm install -g codeclimate-test-reporter meshblu-util
+script:
+- npm test
 after_script:
-- cat coverage/lcov.info | codeclimate
+- codeclimate-test-reporter < coverage/lcov.info

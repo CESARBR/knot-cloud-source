@@ -4,22 +4,17 @@ meshblu = require 'meshblu'
 MeshbluConfig = require 'meshblu-config'
 
 describe 'SocketLogic Events', ->
-  before (done) ->
+  before ->
     filename = path.join __dirname, 'meshblu.json'
     @config = new MeshbluConfig(filename: filename).toJSON()
-    @eventForwarder = meshblu.createConnection
-      server : @config.server
-      port   : @config.port
-      uuid   : @config.uuid
-      token  : @config.token
-
-    @eventForwarder.on 'ready', => done()
-    @eventForwarder.on 'notReady', done
 
   before (done) ->
-    @meshblu = meshblu.createConnection _.pick(@config, 'server', 'port')
+    @meshblu = meshblu.createConnection @config
     @meshblu.once 'ready', (@device) => done()
     @meshblu.on 'notReady', done
+
+  afterEach ->
+    @meshblu.removeAllListeners()
 
   it 'should get here', ->
     expect(true).to.be.true
@@ -27,359 +22,206 @@ describe 'SocketLogic Events', ->
   describe 'EVENT devices', ->
     describe 'when called with a valid request', ->
       beforeEach (done) ->
-        @meshblu.devices {}, (data) =>
-          return done new Error(data.error) if data.error?
-          @eventForwarder.once 'message', (@message) =>
-            done()
+        @meshblu.devices {}, (@data) =>
+          return done new Error(@data.error) if @data.error?
+          done()
 
-      it 'should send a "devices" message', ->
-        expect(@message.topic).to.deep.equal 'devices'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromUuid: @device.uuid
-          request: {}
-        }
+      it 'should the correct data', ->
+        expect(@data.devices).to.not.be.empty
 
     describe 'when called with an invalid request', ->
       beforeEach (done) ->
-        @meshblu.devices {uuid: 'invalid-uuid'}, =>
-          @eventForwarder.once 'message', (@message) =>
-            done()
+        @meshblu.devices {uuid: 'invalid-uuid'}, (@result) => done()
 
-      it 'should send a "devices-error" message', ->
-        expect(@message.topic).to.deep.equal 'devices-error'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromUuid: @device.uuid
-          error: "Devices not found"
-          request:
-            uuid: 'invalid-uuid'
-        }
+      it 'should have an error', ->
+        expect(@result.error).to.exist
+
+      it 'should not have a result', ->
+        expect(@result.devices).to.not.exist
 
   describe 'EVENT device', ->
     describe 'when called with a valid request', ->
       beforeEach (done) ->
-        @meshblu.device {uuid: @device.uuid}, (data) =>
-          return done new Error(data.error) if data.error?
-          @eventForwarder.once 'message', (@message) =>
-            done()
+        @meshblu.device {uuid: @device.uuid}, (@data) =>
+          return done new Error(@data.error) if @data.error?
+          done()
 
-      it 'should send a "devices" message', ->
-        expect(@message.topic).to.deep.equal 'devices'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromUuid: @device.uuid
-          request:
-            uuid: @device.uuid
-        }
+      it 'should have a uuid', ->
+        expect(@data.device.uuid).to.equal @device.uuid
 
     describe 'when called with an invalid request', ->
       beforeEach (done) ->
-        @meshblu.device {uuid: 'invalid-uuid'}, (data) =>
-          return done new Error(data.error) if data.error?
-          @eventForwarder.once 'message', (@message) =>
-            done()
+        @meshblu.device {uuid: 'invalid-uuid'}, (@result) => done()
 
-      it 'should send a "devices-error" message', ->
-        expect(@message.topic).to.deep.equal 'devices-error'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromUuid: @device.uuid
-          error: "Devices not found"
-          request:
-            uuid: 'invalid-uuid'
-        }
+      it 'should have an error', ->
+        expect(@result.error.message).to.equal 'Devices not found'
 
   describe 'EVENT whoami', ->
     describe 'when called with a valid request', ->
       beforeEach (done) ->
-        @meshblu.whoami {}, (data) =>
-          return done new Error(data.error) if data.error?
-          @eventForwarder.once 'message', (@message) =>
-            done()
+        @meshblu.whoami {}, (@result) =>
+          return done new Error(@result.error) if @result.error?
+          done()
 
-      it 'should send a "whoami" message', ->
-        expect(@message.topic).to.deep.equal 'whoami'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromUuid: @device.uuid
-          request: {}
-        }
+      it 'should have the correct uuid', ->
+        expect(@result.uuid).to.equal @device.uuid
 
   describe 'EVENT update', ->
     describe 'when called with a valid request', ->
       beforeEach (done) ->
-        @meshblu.update uuid: @device.uuid, foo: 'bar', (data) =>
-          return done new Error(data.error) if data.error?
-          @eventForwarder.once 'message', (@message) =>
-            done()
+        @meshblu.update uuid: @device.uuid, foo: 'bar', (@result) =>
+          return done new Error(@result.error) if @result.error?
+          done()
 
-      it 'should send a "update" message', ->
-        expect(@message.topic).to.deep.equal 'update'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromUuid: @device.uuid
-          request:
-            query: {uuid: @device.uuid}
-            params: {$set: {foo: 'bar', uuid: @device.uuid}}
-        }
+      it 'should have return the updated device', ->
+        expect(@result.uuid).to.exist
+
+      it 'should not have the from device on the result', ->
+        expect(@result.from).to.not.exist
 
     describe 'when called with an invalid request', ->
       beforeEach (done) ->
-        @meshblu.update uuid: 'invalid-uuid', foo: 'bar', (error) =>
-          @eventForwarder.once 'message', (@message) =>
-            done()
+        @meshblu.update uuid: 'invalid-uuid', foo: 'bar', (@result) => done()
 
-      it 'should send an "update-error" message', ->
-        expect(@message.topic).to.deep.equal 'update-error'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromUuid: @device.uuid
-          error: "Device not found"
-          request:
-            query: {uuid: 'invalid-uuid'}
-            params: {$set: {foo: 'bar', uuid: 'invalid-uuid'}}
-        }
-
-  describe 'EVENT localdevices', ->
-    describe 'when called with a valid request', ->
-      beforeEach (done) ->
-        @meshblu.localdevices (error) =>
-          @eventForwarder.once 'message', (@message) =>
-            done()
-
-      it 'should send a "localdevices" message', ->
-        expect(@message.topic).to.deep.equal 'localdevices'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromIp: '127.0.0.1'
-          fromUuid: @device.uuid
-          request: {}
-        }
-
-  describe 'EVENT unclaimeddevices', ->
-    describe 'when called with a valid request', ->
-      beforeEach (done) ->
-        @meshblu.unclaimeddevices {}, (error) =>
-          @eventForwarder.once 'message', (@message) =>
-            done()
-
-      it 'should send a "unclaimeddevices" message', ->
-        expect(@message.topic).to.deep.equal 'unclaimeddevices'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromIp: '127.0.0.1'
-          fromUuid: @device.uuid
-          request: {}
-        }
-
-    describe 'when called with an invalid request', ->
-      beforeEach (done) ->
-        @meshblu.unclaimeddevices {uuid: 'invalid-uuid'}, (error) =>
-          @eventForwarder.once 'message', (@message) =>
-            done()
-
-      it 'should send an "unclaimeddevices-error" message', ->
-        expect(@message.topic).to.deep.equal 'unclaimeddevices-error'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromUuid: @device.uuid
-          fromIp: "127.0.0.1"
-          error: "Devices not found"
-          request:
-            uuid: 'invalid-uuid'
-        }
+      it 'should have a result.error', ->
+        expect(@result.error.message).to.equal "Device not found"
 
   describe 'EVENT claimdevice', ->
     describe 'when called with a valid request', ->
       beforeEach (done) ->
-        @meshblu.register configWhitelist: ['*'], (data) =>
+        @meshblu.register configureWhitelist: ['*'], (data) =>
           return done new Error data.error if data.error?
 
           @newDevice = data
-          @meshblu.claimdevice uuid: @newDevice.uuid, (data) =>
+          @meshblu.claimdevice uuid: @newDevice.uuid, (@result) =>
             return done new Error data.error if data.error?
-            @eventForwarder.once 'message', (@message) =>
-              done()
+            done()
 
-      it 'should send a "claimdevice" message', ->
-        expect(@message.topic).to.deep.equal 'claimdevice'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromUuid: @device.uuid
-          fromIp:   "127.0.0.1"
-          request:
-            uuid: @newDevice.uuid
-        }
+      it 'should have a result', ->
+        expect(@result.results.uuid).to.deep.equal @newDevice.uuid
 
     describe 'when called with an invalid request', ->
       beforeEach (done) ->
-        @meshblu.claimdevice uuid: 'invalid-uuid', (data) =>
-          @eventForwarder.once 'message', (@message) =>
-            done()
+        @meshblu.claimdevice uuid: 'invalid-uuid', (@result) => done()
 
-      it 'should send an "claimdevice-error" message', ->
-        expect(@message.topic).to.deep.equal 'claimdevice-error'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromUuid: @device.uuid
-          fromIp:   '127.0.0.1'
-          error:    'Device not found'
-          request:
-            uuid: 'invalid-uuid'
-        }
+      it 'should have a result error', ->
+        expect(@result.error).to.deep.equal 'Device not found'
 
   describe 'EVENT getPublicKey', ->
     describe 'when called with a valid request', ->
       beforeEach (done) ->
-        @meshblu.getPublicKey @config.uuid, (error) =>
-          @eventForwarder.once 'message', (@message) =>
-            done()
+        @meshblu.getPublicKey @config.uuid, (@error, @result) => done()
 
-      it 'should send a "getpublickey" message', ->
-        expect(@message.topic).to.deep.equal 'getpublickey'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          request:
-            uuid: @config.uuid
-        }
+      it 'should not have a error', ->
+        expect(@error).to.not.exist
+
+      it 'should have a publicKey', ->
+        expect(@result.isPublic()).to.deep.equal true
 
     describe 'when called with an invalid request', ->
       beforeEach (done) ->
-        @meshblu.getPublicKey 'invalid-uuid', (error) =>
-          @eventForwarder.once 'message', (@message) =>
-            done()
+        @meshblu.getPublicKey 'invalid-uuid', (@error, @result) => done()
 
-      it 'should send an "getpublickey-error" message', ->
-        expect(@message.topic).to.deep.equal 'getpublickey-error'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          error: 'Device not found'
-          request:
-            uuid: 'invalid-uuid'
-        }
+      it 'should not have an error', ->
+        expect(@error.message).to.equal 'Could not find public key for device'
 
   describe 'EVENT resetToken', ->
     describe 'when called with a valid request', ->
       beforeEach (done) ->
-        @meshblu.register configWhitelist: ['*'], (data) =>
-          return done new Error data.error if data.error?
+        @meshblu.register configureWhitelist: ['*'], (@newDevice) =>
+          return done new Error @newDevice.error if @newDevice.error?
+          @meshblu.resetToken @newDevice.uuid, (@result) =>
+            return done new Error @result.error if @result.error?
+            done()
 
-          @newDevice = data
-          @meshblu.resetToken @newDevice.uuid, (data) =>
-            return done new Error data.error if data.error?
-            @eventForwarder.once 'message', (@message) =>
-              done()
-
-      it 'should send a "resettoken" message', ->
-        expect(@message.topic).to.deep.equal 'resettoken'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromUuid: @device.uuid
-          request:
-            uuid: @newDevice.uuid
-        }
+      it 'should have the correct result', ->
+        expect(@result.token).to.not.deep.equal @newDevice.token
 
     describe 'when called with an invalid request', ->
       beforeEach (done) ->
-        @meshblu.resetToken 'invalid-uuid', (error) =>
-          @eventForwarder.once 'message', (@message) =>
-            done()
+        @meshblu.resetToken 'invalid-uuid', (@result) => done()
 
-      it 'should send an "resettoken-error" message', ->
-        expect(@message.topic).to.deep.equal 'resettoken-error'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromUuid: @device.uuid
-          error:    'invalid device'
-          request:
-            uuid: 'invalid-uuid'
-        }
+      it 'should have an error', ->
+        expect(@result.error).to.equal "invalid device"
 
   describe 'EVENT generateAndStoreToken', ->
     describe 'when called with a valid request', ->
       beforeEach (done) ->
-        @meshblu.register configWhitelist: ['*'], (data) =>
+        @meshblu.register configureWhitelist: ['*'], (data) =>
           return done new Error data.error if data.error?
 
           @newDevice = data
-          @meshblu.generateAndStoreToken uuid: @newDevice.uuid, (data) =>
-            return done new Error data.error if data.error?
-            @eventForwarder.once 'message', (@message) =>
-              done()
+          @meshblu.generateAndStoreToken uuid: @newDevice.uuid, (@result) =>
+            return done new Error @result.error if @result.error?
+            done()
 
-      it 'should send a "generatetoken" message', ->
-        expect(@message.topic).to.deep.equal 'generatetoken'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromUuid: @device.uuid
-          request:
-            uuid: @newDevice.uuid
-        }
+      it 'should have a different token', ->
+        expect(@result.token).to.not.equal @newDevice.token
+
+    describe 'when called with a valid tag request', ->
+      beforeEach (done) ->
+        @meshblu.register configureWhitelist: ['*'], (data) =>
+          return done new Error data.error if data.error?
+
+          @newDevice = data
+          @meshblu.generateAndStoreToken uuid: @newDevice.uuid, tag: 'some-tag', (@result) =>
+            return done new Error @result.error if @result.error?
+            done()
+
+      it 'should have the correct result', ->
+        expect(@result.token).to.not.equal @newDevice.token
+        expect(@result.tag).to.equal 'some-tag'
 
     describe 'when called with an invalid request', ->
       beforeEach (done) ->
-        @meshblu.generateAndStoreToken uuid: 'invalid-uuid', (data) =>
-          @eventForwarder.once 'message', (@message) =>
-            done()
+        @meshblu.generateAndStoreToken uuid: 'invalid-uuid', (@result) => done()
 
-      it 'should send an "generatetoken-error" message', ->
-        expect(@message.topic).to.deep.equal 'generatetoken-error'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromUuid: @device.uuid
-          error:    'Device not found'
-          request:
-            uuid: 'invalid-uuid'
-        }
+      it 'should have an error', ->
+        expect(@result.error).to.equal "Device not found"
 
   describe 'EVENT revokeToken', ->
     describe 'when called with a valid request', ->
       beforeEach (done) ->
-        @meshblu.register configWhitelist: ['*'], (data) =>
+        @meshblu.register configureWhitelist: ['*'], (data) =>
           return done new Error data.error if data.error?
 
           @meshblu.generateAndStoreToken uuid: data.uuid, (device) =>
             @newDevice = device
-            @meshblu.revokeToken @newDevice, =>
-              @eventForwarder.once 'message', (@message) =>
-                done()
+            @meshblu.revokeToken @newDevice, (@result)=>
+              done()
 
-      it 'should send a "revoketoken" message', ->
-        expect(@message.topic).to.deep.equal 'revoketoken'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromUuid: @device.uuid
-          request:
-            uuid: @newDevice.uuid
-        }
+      it 'should not have an error', ->
+        expect(@result.error).to.not.exist
 
     describe 'when called with an invalid request', ->
       beforeEach (done) ->
-        @meshblu.revokeToken uuid: 'invalid-uuid', token: 'invalid-token', (error) =>
-          @eventForwarder.once 'message', (@message) =>
-            done()
+        @meshblu.revokeToken uuid: 'invalid-uuid', token: 'invalid-token', (@result) => done()
 
-      it 'should send an "revoketoken-error" message', ->
-        expect(@message.topic).to.deep.equal 'revoketoken-error'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromUuid: @device.uuid
-          error:    'Device not found'
-          request:
-            uuid: 'invalid-uuid'
-        }
+      it 'should have an error', ->
+        expect(@result.error).to.exist
 
   describe 'EVENT register', ->
     describe 'when called with a valid request', ->
       beforeEach (done) ->
-        @meshblu.register {}, (data) =>
-          return done new Error data.error if data.error?
+        @meshblu.register {}, (@result) =>
+          return done new Error @result.error if @result.error?
+          done()
 
-          @eventForwarder.once 'message', (@message) =>
-            done()
+      it 'should have a uuid', ->
+        expect(@result.uuid).to.exist
 
-      it 'should send a "register" message', ->
-        expect(@message.topic).to.deep.equal 'register'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          request:
-            ipAddress: '127.0.0.1'
-        }
+      it 'should have a token', ->
+        expect(@result.token).to.exist
+
+      it 'should have online = false', ->
+        expect(@result.online).to.be.false
 
     describe 'when called with an invalid request', ->
       beforeEach (done) ->
-        @meshblu.register uuid: 'not-allowed', (error) =>
-          @eventForwarder.once 'message', (@message) =>
-            done()
+        @meshblu.register uuid: 'not-allowed', (@result) => done()
 
-      it 'should send an "register-error" message', ->
-        expect(@message.topic).to.deep.equal 'register-error'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          error:  'Device not updated'
-          request:
-            uuid: 'not-allowed'
-            ipAddress: '127.0.0.1'
-        }
+      it 'should have a result.error', ->
+        expect(@result.error).to.exist
 
   describe 'EVENT unregister', ->
     describe 'when called with a valid request', ->
@@ -388,199 +230,84 @@ describe 'SocketLogic Events', ->
           return done new Error data.error if data.error?
 
           @newDevice = data
-          @meshblu.unregister uuid: @newDevice.uuid, (data) =>
+          @meshblu.unregister uuid: @newDevice.uuid, (@result) =>
             return done new Error data.error if data.error?
-            @eventForwarder.once 'message', (@message) =>
-              done()
+            done()
 
-      it 'should send a "unregister" message', ->
-        expect(@message.topic).to.deep.equal 'unregister'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromUuid: @device.uuid
-          request: {uuid: @newDevice.uuid}
-        }
+      it 'should have the correct result', ->
+        expect(@result.fromUuid).to.equal @config.uuid
 
     describe 'when called with an invalid request', ->
       beforeEach (done) ->
-        @meshblu.unregister uuid: 'invalid-uuid', (error) =>
-          @eventForwarder.once 'message', (@message) =>
-            done()
+        @meshblu.unregister uuid: 'invalid-uuid', (@result) => done()
 
-      it 'should send an "unregister-error" message', ->
-        expect(@message.topic).to.deep.equal 'unregister-error'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          error:  'invalid device to unregister'
-          fromUuid: @device.uuid
-          request: {uuid: 'invalid-uuid'}
-        }
+      it 'should have a result.error', ->
+        expect(@result.error).to.exist
 
   describe 'EVENT mydevices', ->
     describe 'when called with a valid request', ->
       beforeEach (done) ->
         @meshblu.register owner: @device.uuid, =>
-          @meshblu.mydevices {}, =>
-            @eventForwarder.once 'message', (@message) =>
-              done()
+          @meshblu.mydevices {}, (@result) => done()
 
-      it 'should send a "devices" message', ->
-        expect(@message.topic).to.deep.equal 'devices'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromUuid: @device.uuid
-          request:
-            owner: @device.uuid
-        }
+      it 'should have the correct result', ->
+        expect(@result.devices).to.not.be.empty
+        expect(@result.devices).to.be.an 'array'
 
     describe 'when called with an invalid request', ->
       beforeEach (done) ->
-        @meshblu.mydevices {uuid: 'invalid-uuid'}, =>
-          @eventForwarder.once 'message', (@message) =>
-            done()
+        @meshblu.mydevices {uuid: 'invalid-uuid'}, (@result) => done()
 
-      it 'should send a "devices-error" message', ->
-        expect(@message.topic).to.deep.equal 'devices-error'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromUuid: @device.uuid
-          error: "Devices not found"
-          request:
-            owner: @device.uuid
-            uuid: 'invalid-uuid'
-        }
+      it 'should have empty devices', ->
+        expect(@result.devices).to.be.empty
 
   describe 'EVENT subscribe', ->
     describe 'when called with a valid request', ->
       beforeEach (done) ->
-        @meshblu.subscribe {uuid: @device.uuid}, (data) =>
-          return done new Error data.error if data.error?
+        @meshblu.on 'message', (@message) =>
+          done() if @message.topic == 'im-awesome'
+        @meshblu.register {owner: @config.uuid}, (@newDevice) =>
+          return done @newDevice.error if @newDevice?.error?
+          @meshblu.subscribe {uuid: @device.uuid}, (data) =>
+            return done new Error data.error if data.error?
+            @meshblu.message {devices: [@config.uuid], topic: 'im-awesome'}, (data) =>
+              return done data.error if data?.error?
 
-          @eventForwarder.once 'message', (@message) =>
-            done()
-
-      it 'should send a "subscribe" message', ->
-        expect(@message.topic).to.deep.equal 'subscribe'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromUuid: @device.uuid
-          request:
-            uuid: @device.uuid
-        }
-
-    describe 'when called with a valid request with token', ->
-      beforeEach (done) ->
-        @meshblu.subscribe {uuid: @device.uuid, token: @device.token}, (data) =>
-          return done new Error data.error if data.error?
-
-          @eventForwarder.once 'message', (@message) =>
-            done()
-
-      it 'should send a "subscribe" message', ->
-        expect(@message.topic).to.deep.equal 'subscribe'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromUuid: @device.uuid
-          request:
-            uuid: @device.uuid
-        }
-
-  describe 'EVENT identity', ->
-    describe 'when called with a valid request', ->
-      beforeEach (done) ->
-        @meshblu.identify()
-        @eventForwarder.once 'message', (@message) =>
-          done()
-
-      it 'should send a "identity" message', ->
-        expect(@message.topic).to.deep.equal 'identity'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          request:
-            uuid: @device.uuid
-        }
-
-    describe 'when called with an invalid request', ->
-      beforeEach (done) ->
-        @tempMeshblu = meshblu.createConnection _.pick(@config, 'server', 'port')
-        @tempMeshblu.once 'ready', (@newDevice) =>
-          @eventForwarder.once 'message', (@message) =>
-            done() # To ignore the first 'identity' message
-
-      beforeEach (done) ->
-        @tempMeshblu.bufferedSocketEmit 'identity', uuid: 'invalid-uuid', debug: true
-        @eventForwarder.on 'message', (message) =>
-          if message.topic == 'identity-error'
-            @message = message
-            @eventForwarder.removeAllListeners 'message'
-            done()
-
-      it 'should send a "identity-error" message', ->
-        expect(@message.topic).to.deep.equal 'identity-error'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          error: "Device not found or token not valid"
-          request:
-            uuid: 'invalid-uuid'
-        }
+      it 'should recieve a message', ->
+        expect(@message.topic).to.deep.equal 'im-awesome'
 
   describe 'EVENT message', ->
     describe 'when called with a valid request', ->
       beforeEach (done) ->
-        @meshblu.message {devices: ['some-uuid']}
-        @eventForwarder.on 'message', (message) =>
-          if message.topic == 'message'
-            @message = message
-            @eventForwarder.removeAllListeners 'message'
-            done()
+        @meshblu.on 'message', (@message) =>
+          done() if @message.topic == 'howdy'
+        @meshblu.message {devices: [@config.uuid], topic: 'howdy'}
 
-      it 'should send a "message" message', ->
-        expect(@message.topic).to.deep.equal 'message'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromUuid: @device.uuid
-          request:
-            devices: ['some-uuid']
-        }
+      it 'should not blow up', ->
+        expect(true).to.be.true
 
   describe 'EVENT data', ->
     describe 'when called with a valid request', ->
       beforeEach (done) ->
-        @meshblu.data uuid: @device.uuid, value: 1, =>
-          @eventForwarder.once 'message', (@message) =>
-            done()
+        @meshblu.data uuid: @device.uuid, value: 1, (result)=>
+          return done result.error if result?.error?
+          done()
 
-      it 'should send a "data" message', ->
-        expect(@message.topic).to.deep.equal 'data'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromUuid: @device.uuid
-          request:
-            uuid: @device.uuid
-            value: 1
-        }
+      it 'should not blow up', ->
+        expect(true).to.be.true
 
     describe 'when called with an invalid request', ->
       beforeEach (done) ->
-        @meshblu.data uuid: 'invalid-uuid', value: 1, =>
-          @eventForwarder.once 'message', (@message) =>
-            done()
+        @meshblu.data uuid: 'invalid-uuid', value: 1, (@result) => done()
 
-      it 'should send a "data-error" message', ->
-        expect(@message.topic).to.deep.equal 'data-error'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromUuid: @device.uuid
-          error: "Device not found"
-          request:
-            uuid: 'invalid-uuid'
-            value: 1
-        }
+      it 'should have an error property', ->
+        expect(@result.error).to.exist
 
   describe 'EVENT getdata', ->
     describe 'when called with a valid request', ->
       beforeEach (done) ->
-        @meshblu.getdata uuid: @device.uuid, token: @device.token, =>
-        @eventForwarder.on 'message', (message) =>
-          if message.topic == 'subscribe'
-            @message = message
-            @eventForwarder.removeAllListeners 'message'
-            done()
+        @meshblu.getdata uuid: @device.uuid, token: @device.token, (@result) => done()
 
-      it 'should send a "subscribe" message', ->
-        expect(@message.topic).to.deep.equal 'subscribe'
-        expect(_.omit @message.payload, '_timestamp').to.deep.equal {
-          fromUuid: @device.uuid
-          request:
-            type: 'data'
-            uuid: @device.uuid
-        }
+      it 'should have the correct result', ->
+        expect(@result.data).to.be.an 'array'
+        expect(@result.data).to.not.be.empty

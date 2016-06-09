@@ -17,15 +17,13 @@ describe 'MeshbluWebsocketHandler', ->
 
   describe 'initialize', ->
     beforeEach ->
-      @socket.on = sinon.spy()
+      @socket.on = sinon.stub()
+      @socket.on.withArgs('open').yields null
       @sut.addListener = sinon.spy()
       @sut.initialize @socket
 
     it 'should assign a socket.id', ->
       expect(@socket.id).to.exist
-
-    it 'should call connect', ->
-      expect(@messageIOClient.start).to.have.been.called
 
     it 'should register message event', ->
       expect(@socket.on).to.have.been.calledWith 'message'
@@ -228,7 +226,7 @@ describe 'MeshbluWebsocketHandler', ->
         expect(@sut.sendFrame).to.have.been.calledWith 'ready', uuid: '1234', token: 'abcd', status: 200
 
       it 'should emit subscribe to my uuid received and broadcast', ->
-        expect(@messageIOClient.subscribe).to.have.been.calledWith '1234', ['received']
+        expect(@messageIOClient.subscribe).to.have.been.calledWith '1234', ['received', 'config', 'data']
 
   describe 'status', ->
     beforeEach ->
@@ -273,7 +271,9 @@ describe 'MeshbluWebsocketHandler', ->
     describe 'when authDevice yields a device', ->
       beforeEach ->
         @getDevice = sinon.stub().yields null, uuid: '5431'
-        @securityImpl = canReceive: sinon.stub().yields null, true
+        @securityImpl =
+          canReceive: sinon.stub().yields null, true
+          canReceiveAs: sinon.stub().yields null, false
         @sut = new MeshbluWebsocketHandler MessageIOClient: @MessageIOClient, securityImpl: @securityImpl, getDevice: @getDevice, meshbluEventEmitter: @meshbluEventEmitter
         @sut.messageIOClient = @messageIOClient
         @sut.authedDevice = something: true
@@ -290,7 +290,9 @@ describe 'MeshbluWebsocketHandler', ->
     describe 'when the device is owned by the owner', ->
       beforeEach ->
         @getDevice = sinon.stub().yields null, uuid: '5431', owner: '1234'
-        @securityImpl = canReceive: sinon.stub().yields null, true
+        @securityImpl =
+          canReceive: sinon.stub().yields null, true
+          canReceiveAs: sinon.stub().yields null, true
         @sut = new MeshbluWebsocketHandler authDevice: @authDevice, MessageIOClient: @MessageIOClient, securityImpl: @securityImpl, getDevice: @getDevice, meshbluEventEmitter: @meshbluEventEmitter
         @sut.authedDevice = uuid: '1234'
         @sut.messageIOClient = @messageIOClient
@@ -299,7 +301,7 @@ describe 'MeshbluWebsocketHandler', ->
         @sut.subscribe uuid: '5431'
 
       it 'should call subscribe _bc', ->
-        expect(@messageIOClient.subscribe).to.have.been.calledWith '5431', ["broadcast", "received", "sent"]
+        expect(@messageIOClient.subscribe).to.have.been.calledWith '5431', ["broadcast", "received", "sent", "config", "data"]
 
   describe 'unsubscribe', ->
     describe 'when called', ->
@@ -357,7 +359,7 @@ describe 'MeshbluWebsocketHandler', ->
   describe 'devices', ->
     describe 'when getDevices yields devices', ->
       beforeEach ->
-        @getDevices = sinon.stub().yields [{uuid: '5431', color: 'green'}, {uuid: '1234', color: 'green'}]
+        @getDevices = sinon.stub().yields null, [{uuid: '5431', color: 'green'}, {uuid: '1234', color: 'green'}]
         @sut = new MeshbluWebsocketHandler getDevices: @getDevices, meshbluEventEmitter: @meshbluEventEmitter
         @sut.authedDevice = {}
         @sut.sendFrame = sinon.spy()
@@ -369,7 +371,7 @@ describe 'MeshbluWebsocketHandler', ->
   describe 'mydevices', ->
     describe 'when called with a query', ->
       beforeEach ->
-        @getDevices = sinon.stub().yields devices: [{uuid: '5431', color: 'green', owner: '5555'}, {uuid: '1234', color: 'green', owner: '5555'}]
+        @getDevices = sinon.stub().yields null, devices: [{uuid: '5431', color: 'green', owner: '5555'}, {uuid: '1234', color: 'green', owner: '5555'}]
         @sut = new MeshbluWebsocketHandler getDevices: @getDevices, meshbluEventEmitter: @meshbluEventEmitter
         @sut.sendFrame = sinon.spy()
         @sut.authedDevice = {}

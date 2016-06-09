@@ -5,9 +5,15 @@ if ((process.env.USE_APP_DYNAMICS || 'false').toLowerCase() === 'true') {
   require('./lib/appdynamics');
 }
 
+
 var program = require('commander');
 var pjson = require('./package.json');
 var config = require('./config');
+
+if (!config.token) {
+  console.error('config.token or environment variable TOKEN is required. Exiting.');
+  process.exit(1);
+}
 
 var parentConnection;
 
@@ -54,7 +60,7 @@ if (process.env.AIRBRAKE_KEY) {
   airbrakeErrors.handleExceptions()
 } else {
   process.on("uncaughtException", function(error) {
-    console.error(error.message, error.stack);
+    console.error(error.stack);
     process.exit(1);
   });
 }
@@ -89,3 +95,8 @@ if (program.mqtt) {
   var mqttServer = require('./lib/mqttServer')(config, parentConnection);
   console.log(' done.');
 }
+
+process.on('SIGTERM', function(){
+  console.log('SIGTERM caught, exiting');
+  process.exit(0);
+})

@@ -5,9 +5,10 @@ createSubscriptionIfAuthorized = (authedDevice, params, callback=_.noop, depende
   database = dependencies.database ? require './database'
   getDevice = dependencies.getDevice ? require './getDevice'
 
-  return callback new Error('Type must be one of ["event"]') unless _.contains ['event'], params.type
+  unless _.contains ['broadcast', 'config', 'received', 'sent'], params.type
+    return callback new Error 'Type must be one of ["broadcast", "config", "received", "sent"]'
 
-  getDevice params.uuid, (error, toDevice) =>
+  getDevice params.subscriberUuid, (error, toDevice) =>
     return callback error if error?
 
     simpleAuth = new SimpleAuth()
@@ -15,7 +16,7 @@ createSubscriptionIfAuthorized = (authedDevice, params, callback=_.noop, depende
       return callback error if error?
       return callback new Error('Insufficient permissions to subscribe on behalf of that device') unless canConfigure
 
-      subscription = {subscriberUuid: params.uuid, emitterUuid: params.targetUuid, type: params.type}
+      subscription = {subscriberUuid: params.subscriberUuid, emitterUuid: params.emitterUuid, type: params.type}
       database.subscriptions.update subscription, subscription, upsert: true, callback
 
 module.exports = createSubscriptionIfAuthorized

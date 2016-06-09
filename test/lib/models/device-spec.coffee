@@ -11,8 +11,28 @@ describe 'Device', ->
       @devices  = @database.devices
       @getGeo = sinon.stub().yields null, {}
       @clearCache = sinon.stub().yields null
+      @cacheDevice = sinon.stub()
+      @findCachedDevice = sinon.stub().yields null
       @config = token: 'totally-secret-yo'
-      @dependencies = {database: @database, getGeo: @getGeo, clearCache: @clearCache, config: @config}
+      @redis =
+        get: sinon.stub()
+        set: sinon.stub()
+        del: sinon.stub()
+        exists: sinon.stub()
+        setex: sinon.stub()
+
+      @redis.get.yields null
+      @redis.setex.yields null
+
+      @dependencies =
+        database: @database
+        getGeo: @getGeo
+        clearCache: @clearCache
+        config: @config
+        redis: @redis
+        cacheDevice: @cacheDevice
+        findCachedDevice: @findCachedDevice
+
       @hashedToken = 'qe4NSaR3wrM6c2Q6uE6diz23ZXHyXUE2u/zJ9rvGE5A='
       done error
 
@@ -157,7 +177,7 @@ describe 'Device', ->
   describe '->save', ->
     describe 'when a device is saved', ->
       beforeEach (done) ->
-        @uuid = '66e20044-7262-4c26-84f0-c2c00fa02465';
+        @uuid = '66e20044-7262-4c26-84f0-c2c00fa02465'
         @devices.insert {uuid: @uuid}, done
 
       beforeEach (done) ->
@@ -269,7 +289,7 @@ describe 'Device', ->
   describe '->storeToken', ->
     describe 'when a device exists', ->
       beforeEach (done) ->
-        @uuid = '50805aa3-a88b-4a67-836b-4752e318c979';
+        @uuid = '50805aa3-a88b-4a67-836b-4752e318c979'
         @devices.insert uuid: @uuid, done
 
       beforeEach ->
@@ -277,7 +297,7 @@ describe 'Device', ->
 
       describe 'when called with token mystery-token', ->
         beforeEach (done) ->
-          @sut.storeToken 'mystery-token', (error) =>
+          @sut.storeToken {token: 'mystery-token'}, (error) =>
             return done error if error
             @sut.fetch (error, attributes) =>
               @updatedDevice = attributes
@@ -298,9 +318,60 @@ describe 'Device', ->
             expect(token).to.exist
             done()
 
+      describe 'when called with token mystery-token and a tag', ->
+        beforeEach (done) ->
+          @sut.storeToken {token: 'mystery-token', tag: 'mystery'}, (error) =>
+            return done error if error
+            @sut.fetch (error, attributes) =>
+              @updatedDevice = attributes
+              @token = @updatedDevice.meshblu?.tokens?[@hashedToken]
+              done(error)
+
+        it 'should hash the token and add it to the attributes', ->
+          expect(@updatedDevice.meshblu?.tokens).to.include.keys @hashedToken
+
+        it 'should add a timestamp to the token', ->
+          expect(@token.createdAt?.getTime()).to.be.closeTo Date.now(), 1000
+
+        it 'should add a tag to the token', ->
+          expect(@token.tag).to.equal 'mystery'
+
+        it 'should store the token in the database', (done) ->
+          @devices.findOne uuid: @uuid, (error, device) =>
+            return done error if error?
+            token = @updatedDevice.meshblu?.tokens?[@hashedToken]
+            expect(token).to.exist
+            done()
+
+  describe '->generateAndStoreTokenInCache', ->
+    describe 'when called and it yields a token', ->
+      beforeEach (done) ->
+        @sut = new Device uuid: @uuid, @dependencies
+        @sut.generateToken = sinon.stub().returns 'cheeseburger'
+        @sut._hashToken = sinon.stub().yields null, 'this-is-totally-a-secret'
+        @sut._storeTokenInCache = sinon.stub().yields null
+        @sut.generateAndStoreTokenInCache (@error, @token) => done()
+      it 'should call _storeTokenInCache', ->
+        expect(@sut._storeTokenInCache).to.have.been.calledWith 'this-is-totally-a-secret'
+      it 'should have a token', ->
+        expect(@token).to.deep.equal 'cheeseburger'
+
+    describe 'when called and it yields a different token', ->
+      beforeEach (done) ->
+        @sut = new Device uuid: @uuid, @dependencies
+        @sut.generateToken = sinon.stub().returns 'california burger'
+        @sut._hashToken = sinon.stub().yields null, 'this-is-totally-a-different-secret'
+        @sut._storeTokenInCache = sinon.stub().yields null
+        @sut.generateAndStoreTokenInCache (@error, @token) => done()
+
+      it 'should call _storeTokenInCache', ->
+        expect(@sut._storeTokenInCache).to.have.been.calledWith 'this-is-totally-a-different-secret'
+      it 'should have a token', ->
+        expect(@token).to.deep.equal 'california burger'
+
   describe '->revokeToken', ->
     beforeEach (done) ->
-      @uuid = '50805aa3-a88b-4a67-836b-4752e318c979';
+      @uuid = '50805aa3-a88b-4a67-836b-4752e318c979'
       @devices.insert
         uuid: @uuid,
         meshblu:
@@ -331,8 +402,10 @@ describe 'Device', ->
           @device.save done
 
       beforeEach (done) ->
-          @sut = new Device uuid: @uuid, @dependencies
-          @sut.verifyToken 'mushrooms', (error, @verified) => done()
+        @sut = new Device uuid: @uuid, @dependencies
+        @sut._isTokenInBlacklist = sinon.stub().yields null, false
+        @sut._verifyTokenInCache = sinon.stub().yields null, false
+        @sut.verifyToken 'mushrooms', (error, @verified) => done()
 
       it 'should be verified', ->
         expect(@verified).to.be.true
@@ -348,39 +421,16 @@ describe 'Device', ->
 
       beforeEach (done) ->
         @sut = new Device uuid: @uuid, @dependencies
+        @sut._isTokenInBlacklist = sinon.stub().yields null, false
+        @sut._verifyTokenInCache = sinon.stub().yields null, false
         @sut.verifyToken 'mystery-token', (error, @verified) => done()
 
       it 'should be verified', ->
         expect(@verified).to.be.true
 
-    describe 'when using an old token', ->
-      beforeEach (done) ->
-        @devices.insert
-          uuid: @uuid,
-          tokens: [{hash: bcrypt.hashSync('mystery-token', 8)}]
-        , done
-
-      beforeEach (done) ->
-        @sut = new Device uuid: @uuid, @dependencies
-        @sut.verifyToken 'mystery-token', (error, @verified) => done()
-
-      it 'should be verified', ->
-        expect(@verified).to.be.true
-
-      it 'should store the token in the database', (done) ->
-        @devices.findOne uuid: @uuid, (error, device) =>
-          return done error if error?
-          expect(device.meshblu?.tokens).to.include.keys @hashedToken
-          done()
-
-      it 'should remove the deprecated token in the database', (done) ->
-        @sut.verifyDeprecatedToken 'mystery-token', (error, verified) =>
-          expect(verified).to.be.false
-          done()
-
-  describe '->verifyNewToken', ->
+  describe '->verifySessionToken', ->
     beforeEach (done) ->
-      @uuid = '50805aa3-a88b-4a67-836b-4752e318c979';
+      @uuid = '50805aa3-a88b-4a67-836b-4752e318c979'
       @devices.insert
         uuid: @uuid,
         meshblu:
@@ -391,7 +441,7 @@ describe 'Device', ->
     describe 'when a token is valid', ->
       beforeEach (done) ->
         @sut = new Device uuid: @uuid, @dependencies
-        @sut.verifyNewToken 'mystery-token', (error, @verified) => done()
+        @sut.verifySessionToken 'mystery-token', (error, @verified) => done()
 
       it 'should be verified', ->
         expect(@verified).to.be.true
@@ -399,7 +449,7 @@ describe 'Device', ->
     describe 'when a token is invalid', ->
       beforeEach (done) ->
         @sut = new Device uuid: @uuid, @dependencies
-        @sut.verifyNewToken 'mystery-tolkein', (error, @verified) => done()
+        @sut.verifySessionToken 'mystery-tolkein', (error, @verified) => done()
 
       it 'should not be verified', ->
         expect(@verified).to.be.false
@@ -427,8 +477,8 @@ describe 'Device', ->
             done()
 
       describe 'when called with an increment operator', ->
-        beforeEach ->
-          @sut.update $inc: {pigeonCount: 1}
+        beforeEach (done) ->
+          @sut.update $inc: {pigeonCount: 1}, done
 
         it 'should increment the pigeon count', (done) ->
           @devices.findOne uuid: 'my-device', (error, device) =>
@@ -436,29 +486,211 @@ describe 'Device', ->
             expect(device.pigeonCount).to.equal 4
             done()
 
-  describe '->validate', ->
-    describe 'when created with a different uuid', ->
+  describe '-> _clearTokenCache', ->
+    describe 'when redis client is not available', ->
       beforeEach ->
-        @sut = new Device uuid: 'f853214e-69b9-4ca7-a11e-7ee7b1f8f5be', @dependencies
-        @sut.set uuid: 'different-uuid'
-        @result = @sut.validate()
+        @dependencies.redis = {}
+        @sut = new Device uuid: 'a-uuid', @dependencies
+        @sut._clearTokenCache (@error, @result) =>
 
       it 'should return false', ->
         expect(@result).to.be.false
 
-      it 'should set error on the device', ->
-        expect(@sut.error).to.exist
-        expect(@sut.error.message).to.equal 'Cannot modify uuid'
+    describe 'when redis client is available', ->
+      beforeEach (done) ->
+        @sut = new Device uuid: 'a-uuid', @dependencies
+        @sut._clearTokenCache (@error, @result) => done()
+        @redis.del.yield null, 1
+
+      it 'should return the result of del', ->
+        expect(@result).to.equal 1
+
+      it 'should call redis.del', ->
+        expect(@redis.del).to.have.been.calledWith 'tokens:a-uuid'
+
+  describe '-> _storeTokenInCache', ->
+    describe 'when redis client is not available', ->
+      beforeEach ->
+        @dependencies.redis = {}
+        @sut = new Device uuid: 'a-uuid', @dependencies
+        @sut._storeTokenInCache 'foo', (@error, @result) =>
+
+      it 'should return false', ->
+        expect(@result).to.be.false
+
+    describe 'when redis client is available', ->
+      beforeEach (done) ->
+        @sut = new Device uuid: 'a-uuid', @dependencies
+        @sut._storeTokenInCache 'foo', (@error) => done()
+        @redis.set.yield null, 'OK'
+
+      it 'should call redis.set', ->
+        expect(@redis.set).to.have.been.calledWith 'meshblu-token-cache:a-uuid:foo', ''
+
+  describe '-> removeTokenFromCache', ->
+    describe 'when redis client is not available', ->
+      beforeEach ->
+        @dependencies.redis = {}
+        @sut = new Device uuid: 'a-uuid', @dependencies
+        @sut.removeTokenFromCache 'foo', (@error, @result) =>
+
+      it 'should return false', ->
+        expect(@result).to.be.false
+
+    describe 'when redis client is available', ->
+      beforeEach (done) ->
+        @sut = new Device uuid: 'a-uuid', @dependencies
+        @sut._hashToken = sinon.stub().yields null, 'hashed-foo'
+        @sut.removeTokenFromCache 'foo', (@error, @result) => done()
+        @redis.del.yield null
+
+      it 'should call redis.srem', ->
+        expect(@redis.del).to.have.been.calledWith 'meshblu-token-cache:a-uuid:hashed-foo'
+
+  describe '-> _storeInvalidTokenInBlacklist', ->
+    describe 'when redis client is not available', ->
+      beforeEach ->
+        @dependencies.redis = {}
+        @sut = new Device uuid: 'a-uuid', @dependencies
+        @sut._storeInvalidTokenInBlacklist 'foo', (@error, @result) =>
+
+      it 'should return false', ->
+        expect(@result).to.be.false
+
+    describe 'when redis client is available', ->
+      beforeEach (done) ->
+        @sut = new Device uuid: 'a-uuid', @dependencies
+        @sut._storeInvalidTokenInBlacklist 'foo', (@error, @result) => done()
+        @redis.set.yield null
+
+      it 'should call redis.set', ->
+        expect(@redis.set).to.have.been.calledWith 'meshblu-token-black-list:a-uuid:foo'
+
+  describe '-> _verifyTokenInCache', ->
+    describe 'when redis client is not available', ->
+      beforeEach ->
+        @dependencies.redis = {}
+        @sut = new Device uuid: 'a-uuid', @dependencies
+        @sut._verifyTokenInCache 'foo', (@error, @result) =>
+
+      it 'should return false', ->
+        expect(@result).to.be.false
+
+    describe 'when redis client is available', ->
+      describe 'when the member is available in the set', ->
+        beforeEach (done) ->
+          @sut = new Device uuid: 'a-uuid', @dependencies
+          @sut._verifyTokenInCache 'foo', (@error, @result) => done()
+          @redis.exists.yield null, 1
+
+        it 'should return the result of exists', ->
+          expect(@result).to.equal 1
+
+        it 'should call redis.exists', ->
+          expect(@redis.exists).to.have.been.calledWith 'meshblu-token-cache:a-uuid:DnN1cXdfiInpeLs9VjOXM+C/1ow2nGv46TGrevRN3a0='
+
+      describe 'when the member is not available in the set', ->
+        beforeEach (done) ->
+          @sut = new Device uuid: 'a-uuid', @dependencies
+          @sut._verifyTokenInCache 'foo', (@error, @result) => done @error
+          @redis.exists.yield null, 0
+
+        it 'should return the result of exists', ->
+          expect(@result).to.equal 0
+
+        it 'should call redis.exists', ->
+          expect(@redis.exists).to.have.been.calledWith 'meshblu-token-cache:a-uuid:DnN1cXdfiInpeLs9VjOXM+C/1ow2nGv46TGrevRN3a0='
+
+  describe '-> _isTokenInBlacklist', ->
+    describe 'when redis client is not available', ->
+      beforeEach ->
+        @dependencies.redis = {}
+        @sut = new Device uuid: 'a-uuid', @dependencies
+        @sut._isTokenInBlacklist 'foo', (@error, @result) =>
+
+      it 'should return false', ->
+        expect(@result).to.be.false
+
+    describe 'when redis client is available', ->
+      describe 'when the member is available in the set', ->
+        beforeEach (done) ->
+          @sut = new Device uuid: 'a-uuid', @dependencies
+          @sut._isTokenInBlacklist 'foo', (@error, @result) => done()
+          @redis.exists.yield null, 1
+
+        it 'should return the result of exists', ->
+          expect(@result).to.equal 1
+
+        it 'should call redis.exists', ->
+          expect(@redis.exists).to.have.been.calledWith 'meshblu-token-black-list:a-uuid:foo'
+
+      describe 'when the member is not available in the set', ->
+        beforeEach (done) ->
+          @sut = new Device uuid: 'a-uuid', @dependencies
+          @sut._isTokenInBlacklist 'foo', (@error, @result) => done()
+          @redis.exists.yield null, 0
+
+        it 'should return the result of exists', ->
+          expect(@result).to.equal 0
+
+        it 'should call redis.exists', ->
+          expect(@redis.exists).to.have.been.calledWith 'meshblu-token-black-list:a-uuid:foo'
+
+  describe '-> resetToken', ->
+    beforeEach ->
+      @sut = new Device uuid: 'a-uuid', @dependencies
+      sinon.stub(@sut, 'save')
+
+    describe 'when it works', ->
+      beforeEach ->
+        @sut.resetToken (@error, @token) =>
+        @sut.save.yield null
+
+      it 'should not have an error', ->
+        expect(@error).not.to.exist
+
+      it 'should have a token', ->
+        expect(@token).to.exist
+
+      it 'should call set the token attribute', ->
+        expect(@sut.attributes.token).to.exist
+
+    describe 'when it does not work', ->
+      beforeEach ->
+        @sut.resetToken (@error, @token) =>
+        @sut.save.yield new Error 'something wrong'
+
+      it 'should have an error', ->
+        expect(@error).to.exist
+
+      it 'should not have a token', ->
+        expect(@token).not.to.exist
+
+  describe '->validate', ->
+    describe 'when created with a different uuid', ->
+      beforeEach (done) ->
+        @sut = new Device uuid: 'f853214e-69b9-4ca7-a11e-7ee7b1f8f5be', @dependencies
+        @sut.set uuid: 'different-uuid'
+        @sut.validate (@error, @result) =>
+          done()
+
+      it 'should yield false', ->
+        expect(@result).to.be.false
+
+      it 'should have an error', ->
+        expect(@error).to.exist
+        expect(@error.message).to.equal 'Cannot modify uuid'
 
     describe 'when updated with the same uuid', ->
-      beforeEach ->
+      beforeEach (done) ->
         @uuid = '758a080b-fd29-4413-8339-53cc5de3a649'
         @sut = new Device uuid: @uuid, @dependencies
         @sut.set uuid: @uuid
-        @result = @sut.validate()
+        @sut.validate (@error, @result) =>
+          done()
 
-      it 'should return true', ->
+      it 'should yield true', ->
         expect(@result).to.be.true
 
-      it 'should not set an error on the device', ->
-        expect(@sut.error).to.not.exist
+      it 'should not yield an error', ->
+        expect(@error).to.not.exist
