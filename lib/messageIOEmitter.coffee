@@ -13,6 +13,7 @@ class MessageIOEmitter
   emit: (channel, topic, data) =>
     _.each @emitters, (emitter) ->
       debug 'emit', channel, topic, data
-      emitter.in(channel).emit(topic, data)
+      if emitter and emitter.in != null
+        emitter.in(channel).emit(topic, data)
 
 module.exports = MessageIOEmitter
