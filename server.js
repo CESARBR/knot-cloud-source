@@ -67,7 +67,7 @@ if (process.env.AIRBRAKE_KEY) {
 
 if (program.parent) {
   process.stdout.write('Starting Parent connection...');
-  parentConnection = require('./lib/parentConnection')(config);
+  parentConnection = require('./lib/knotParentConnection').openParentConnection(config);
   console.log(' done.');
 }
 
