@@ -4,7 +4,7 @@ generateToken = require './generateToken'
 logEvent      = require './logEvent'
 
 module.exports = (device={}, callback=_.noop, dependencies={}) ->
-  uuid         = dependencies.uuid || require 'node-uuid'
+  uuid         = dependencies.uuid || (require 'node-uuid').v4()
   database     = dependencies.database ? require './database'
   oldUpdateDevice = dependencies.oldUpdateDevice ? require './oldUpdateDevice'
   {devices}    = database
@@ -12,7 +12,7 @@ module.exports = (device={}, callback=_.noop, dependencies={}) ->
   device = _.cloneDeep device
 
   newDevice =
-    uuid: uuid.v4()
+    uuid: uuid
     online: false
 
   debug "registering", device
@@ -20,16 +20,16 @@ module.exports = (device={}, callback=_.noop, dependencies={}) ->
   devices.insert newDevice, (error) =>
     debug 'inserted', error
     return callback new Error('Device not registered') if error?
-
+    
     device.token ?= generateToken()
     device.discoverWhitelist ?= [{uuid:device.owner, rule:''}] if device.owner
     device.configureWhitelist ?= [{uuid:device.owner, rule:''}] if device.owner
-
+    
+    
     debug 'about to update device', device
     oldUpdateDevice newDevice.uuid, device, (error, savedDevice) =>
       return callback new Error('Device not updated') if error?
 
       logEvent 400, savedDevice
       savedDevice.token = device.token
-
       callback null, savedDevice
