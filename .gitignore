@@ -9,6 +9,7 @@ skynet.txt
 .DS_Store
 *.swp
 *.swo
+*.vscode/
 
 #NEDB files
 *.db
