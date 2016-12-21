@@ -65,38 +65,41 @@ if (process.env.AIRBRAKE_KEY) {
   });
 }
 
+
 if (program.parent) {
-  process.stdout.write('Starting Parent connection...');
-  parentConnection = require('./lib/knotParentConnection').openParentConnection(config);
-  console.log(' done.');
-}
+  process.stdout.write('Starting setup connection...');
 
-if (program.coap) {
-  process.stdout.write('Starting CoAP...');
-  var coapServer = require('./lib/coapServer')(config, parentConnection);
-  console.log(' done.');
-}
+  require('./lib/knotInitializer').setupUserConfiguration(function(parentConnection) {
+    if (program.coap) {
+      process.stdout.write('Starting CoAP...');
+      var coapServer = require('./lib/coapServer')(config, parentConnection);
+      console.log(' done.');
+    }
 
-if (true || program.http || program.https) {
-  process.stdout.write('Starting HTTP/HTTPS...');
-  var httpServer = require('./lib/httpServer')(config, parentConnection);
-  console.log(' done.');
-}
+    if (true || program.http || program.https) {
+      process.stdout.write('Starting HTTP/HTTPS...');
+      var httpServer = require('./lib/httpServer')(config, parentConnection);
+      console.log(' done.');
+    }
 
-if (program.mdns) {
-  process.stdout.write('Starting mDNS...');
-  var mdnsServer = require('./lib/mdnsServer')(config);
-  mdnsServer.start();
-  console.log(' done.');
-}
+    if (program.mdns) {
+      process.stdout.write('Starting mDNS...');
+      var mdnsServer = require('./lib/mdnsServer')(config);
+      mdnsServer.start();
+      console.log(' done.');
+    }
 
-if (program.mqtt) {
-  process.stdout.write('Starting MQTT...');
-  var mqttServer = require('./lib/mqttServer')(config, parentConnection);
-  console.log(' done.');
-}
+    if (program.mqtt) {
+      process.stdout.write('Starting MQTT...');
+      var mqttServer = require('./lib/mqttServer')(config, parentConnection);
+      console.log(' done.');
+    }
 
-process.on('SIGTERM', function(){
-  console.log('SIGTERM caught, exiting');
-  process.exit(0);
-})
+    process.on('SIGTERM', function(){
+      console.log('SIGTERM caught, exiting');
+      process.exit(0);
+    });
+  });
+
+  console.log('Setup done.');
+}
