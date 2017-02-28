@@ -11,11 +11,6 @@ var program = require('commander');
 var pjson = require('./package.json');
 var config = require('./config');
 
-if (!config.token) {
-  console.error('config.token or environment variable TOKEN is required. Exiting.');
-  process.exit(1);
-}
-
 var parentConnection;
 
 program
@@ -70,6 +65,12 @@ if (!program.noparent) {
   process.stdout.write('Starting Parent Connection...');
   parentConnection = require('./lib/knotParentConnection').openParentConnection(config);
   console.log(' done.');
+}
+else {
+  if (!config.uuid) {
+    console.error('config.uuid or environment variable UUID is required. Exiting.');
+    process.exit(1);
+  }
 }
 
 if (program.coap) {

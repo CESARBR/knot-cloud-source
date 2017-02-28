@@ -124,7 +124,8 @@ module.exports = {
    uuid: process.env.PARENT_CONNECTION_UUID,
    token: process.env.PARENT_CONNECTION_TOKEN,
    server: process.env.PARENT_CONNECTION_SERVER,
-   port: parseInt(process.env.PARENT_CONNECTION_PORT)
+   port: parseInt(process.env.PARENT_CONNECTION_PORT),
+   knotCloudUuid: process.env.UUID
  },
  messageBus: {
    port: parseInt(process.env.MESSAGE_BUS_PORT || 7777)
