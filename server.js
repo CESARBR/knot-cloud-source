@@ -30,7 +30,7 @@ program
   .option('--https', 'Enable HTTPS server (defaults to false)')
   .option('--mdns', 'Enable Multicast DNS (defaults to false)')
   .option('--mqtt', 'Enable MQTT server (defaults to false)')
-  .option('--parent', 'Enable Parent connection (defaults to false)')
+  .option('--noparent', 'Disable Parent Connection (defaults to false)')
   .parse(process.argv);
 
 // Defaults
@@ -39,12 +39,12 @@ program.environment = program.environment || process.env.NODE_ENV || 'developmen
 // program.httpPort    = program.httpPort || 3000;
 // program.httpsPort   = program.httpsPort || 4000;
 // program.mqttPort    = program.mqttPort || 1883;
-program.coap        = program.coap || false;
-program.http        = program.http || false;
-program.https       = program.https || false;
-program.mdns        = program.mdns || false;
-program.mqtt        = program.mqtt || false;
-program.parent      = program.parent || false;
+program.coap          = program.coap || false;
+program.http          = program.http || false;
+program.https         = program.https || false;
+program.mdns          = program.mdns || false;
+program.mqtt          = program.mqtt || false;
+program.noparent      = program.noparent || false;
 
 console.log("");
 console.log("MM    MM              hh      bb      lll         ");
@@ -66,8 +66,8 @@ if (process.env.AIRBRAKE_KEY) {
   });
 }
 
-if (program.parent) {
-  process.stdout.write('Starting Parent connection...');
+if (!program.noparent) {
+  process.stdout.write('Starting Parent Connection...');
   parentConnection = require('./lib/knotParentConnection').openParentConnection(config);
   console.log(' done.');
 }
