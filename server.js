@@ -1,5 +1,6 @@
 'use strict';
 require('coffee-script/register');
+require('dotenv').config();
 
 if ((process.env.USE_APP_DYNAMICS || 'false').toLowerCase() === 'true') {
   require('./lib/appdynamics');
