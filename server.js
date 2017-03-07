@@ -1,5 +1,6 @@
 'use strict';
 require('coffee-script/register');
+var knotInitializer = require('./lib/knotInitializer');
 
 if ((process.env.USE_APP_DYNAMICS || 'false').toLowerCase() === 'true') {
   require('./lib/appdynamics');
@@ -65,38 +66,42 @@ if (process.env.AIRBRAKE_KEY) {
   });
 }
 
+var setup = function(parentConnection) {
+  if (program.coap) {
+    process.stdout.write('Starting CoAP...');
+    var coapServer = require('./lib/coapServer')(config, parentConnection);
+    console.log(' done.');
+  }
+
+  if (true || program.http || program.https) {
+    process.stdout.write('Starting HTTP/HTTPS...');
+    var httpServer = require('./lib/httpServer')(config, parentConnection);
+    console.log(' done.');
+  }
+
+  if (program.mdns) {
+    process.stdout.write('Starting mDNS...');
+    var mdnsServer = require('./lib/mdnsServer')(config);
+    mdnsServer.start();
+    console.log(' done.');
+  }
+
+  if (program.mqtt) {
+    process.stdout.write('Starting MQTT...');
+    var mqttServer = require('./lib/mqttServer')(config, parentConnection);
+    console.log(' done.');
+  }
+
+  process.on('SIGTERM', function(){
+    console.log('SIGTERM caught, exiting');
+    process.exit(0);
+  });
+};
+
 if (program.parent) {
-  process.stdout.write('Starting Parent connection...');
-  parentConnection = require('./lib/knotParentConnection').openParentConnection(config);
-  console.log(' done.');
-}
+  process.stdout.write('Starting setup connection...\n');
+  knotInitializer.setupUserConfiguration(setup);
 
-if (program.coap) {
-  process.stdout.write('Starting CoAP...');
-  var coapServer = require('./lib/coapServer')(config, parentConnection);
-  console.log(' done.');
+} else {
+  setup();
 }
-
-if (true || program.http || program.https) {
-  process.stdout.write('Starting HTTP/HTTPS...');
-  var httpServer = require('./lib/httpServer')(config, parentConnection);
-  console.log(' done.');
-}
-
-if (program.mdns) {
-  process.stdout.write('Starting mDNS...');
-  var mdnsServer = require('./lib/mdnsServer')(config);
-  mdnsServer.start();
-  console.log(' done.');
-}
-
-if (program.mqtt) {
-  process.stdout.write('Starting MQTT...');
-  var mqttServer = require('./lib/mqttServer')(config, parentConnection);
-  console.log(' done.');
-}
-
-process.on('SIGTERM', function(){
-  console.log('SIGTERM caught, exiting');
-  process.exit(0);
-})
