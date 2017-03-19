@@ -62,9 +62,7 @@ if (process.env.AIRBRAKE_KEY) {
 }
 
 if (!program.noparent) {
-  process.stdout.write('Starting Parent Connection...');
   parentConnection = require('./lib/knotParentConnection').openParentConnection(config);
-  console.log(' done.');
 }
 else {
   if (!config.uuid) {
