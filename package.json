@@ -7,6 +7,7 @@
     "@octoblu/redis-ns": "^0.1.1",
     "JSONStream": "~0.9.0",
     "async": "^0.9.0",
+    "crypto-js": "*",
     "bcrypt": "^0.8.1",
     "body-parser": "^1.14.1",
     "circular": "^1.0.5",
