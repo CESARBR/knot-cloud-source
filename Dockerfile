@@ -1,7 +1,7 @@
-FROM node:0.10.40
+FROM node:6.2.1
 MAINTAINER Octoblu, Inc. <docker@octoblu.com>
 
-EXPOSE 80
+EXPOSE 3000
 EXPOSE 1883
 EXPOSE 5683/udp
 
