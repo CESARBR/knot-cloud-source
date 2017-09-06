@@ -1,0 +1,5 @@
+{
+    "uid": "knot-cloud",
+    "append": true,
+    "script": "server.js"
+}
