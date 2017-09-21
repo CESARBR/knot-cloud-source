@@ -151,14 +151,13 @@ const removeInvalidChars = (UUID) => {
 
 // **************** DEVICES ****************
 
-const createDevicePromise = (application, deviceId, deviceName, deviceDescription, locationName, deviceModel) => {
-    let path = `/${application}/devices`;
+const createDevicePromise = (gatewayUUID, deviceId) => {
+    let path = `/${removeInvalidChars(gatewayUUID)}/devices`;
+    let clearedDeviceId=removeInvalidChars(deviceId);
     let body = {
-        "id": deviceId,
-        "name": deviceName,
-        "description": deviceDescription,
-        "locationName": locationName,
-        "deviceModelName": deviceModel,
+        "id": clearedDeviceId.substring(clearedDeviceId.length - 16),
+        "name": "knotthing",
+        "description": "knot thing",
         "active": true
     }
     return getPostPromise(path, body, application);
