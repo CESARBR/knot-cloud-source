@@ -60,7 +60,7 @@ module.exports = {
     host : "https://api.techlab.konkerlabs.net"
   },
   mongo: {
-    databaseUrl: process.env.MONGODB_URI
+    databaseUrl: "mongodb://localhost:27017/skynet"
   },
   port: parseInt(process.env.PORT) || 3000,
   tls: {
