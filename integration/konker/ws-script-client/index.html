@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+      * { box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      body input { margin-left: 5px; margin-bottom: 10px; }
+      form textarea { padding: 10px; width: 50%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; position: absolute; }
+    </style>
+  </head>
+  <body>
+    <input id="device" type="radio" value="updateGatewayDeviceMapping">Criar Device</input>
+    <input id="data" type="radio" value="data">Enviar Mensagem</input>
+    <form action="">
+      <textarea id="m" rows="4" cols="50"></textarea>
+      <button>Send</button>
+    </form>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      $(function () {
+        var socket = io();
+        $('form').submit(function(){
+          var obj = JSON.parse($('#m').val());
+          socket.emit($('input[type=radio]:checked').val(), obj);
+          return false;
+        });
+        
+        socket.on('updateGatewayDeviceMapping', function(msg){
+          $('#messages').append($('<li>').text(msg));
+        });
+      });
+
+      $('#device').click(function() {
+        $('#data').removeAttr('checked');
+        $('#m').val("{\"gatewayUUID\":\"efc64442-5aab-4cce-8ffb-1a2e7a580000\",\"mappings\":[{\"thingUUID\":\"efc64442-5aab-4cce-8ffb-1a2e7a580001\",\"gatewayUUID\":\"efc64442-5aab-4cce-8ffb-1a2e7a580000\",\"mapping\":[\"efc64442-5aab-4cce-8ffb-1a2e7a580000\", \"efc64442-5aab-4cce-8ffb-1a2e7a580001\"]}]}")
+      });
+
+      $('#data').click(function() {
+        $('#device').removeAttr('checked');
+        $('#m').val("{\"uuid\":\"f7b6397c-8912-44d4-b095-e8725fdd0000\",\"source\":\"efc64442-5aab-4cce-8ffb-1a2e7a580001\",\"data\":{\"sensor_id\":2,\"value\":false,\"uuid\":\"efc64442-5aab-4cce-8ffb-1a2e7a580001\",\"token\":\"4939536befabfd6523927ce2e0a45a43b2482e0d\"}}")
+      });
+    </script>
+  </body>
+</html>
