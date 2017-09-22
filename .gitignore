@@ -26,3 +26,7 @@ test-forwarded-for.sh
 # dev files
 .*-dev
 *.dockerfile-dev
+
+
+#Konker, .env with tests
+.env
