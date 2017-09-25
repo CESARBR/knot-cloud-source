@@ -49,7 +49,7 @@ const getGetPromise = (path, application) => {
 
     return requestToken()
         .then(() => {
-            return axios.get(`${config.konkerAPI.host}/v1/${application.app_name}${path}`,
+            return axios.get(`${config.konkerAPI.host}/v1/${application}${path}`,
             {
                 headers: { 
                     'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ const getPutPromise = (path, body, application) => {
 
     return requestToken()
         .then(() => {
-            return axios.put(`${config.konkerAPI.host}/v1/${application.app_name}${path}`,
+            return axios.put(`${config.konkerAPI.host}/v1/${application}${path}`,
             body,
             {
                 headers: { 
@@ -112,7 +112,7 @@ const getDeletePromise = (path, application) => {
     
     return requestToken()
         .then(() => {
-            return axios.delete(`${config.konkerAPI.host}/v1/${application.app_name}${path}`,
+            return axios.delete(`${config.konkerAPI.host}/v1/${application}${path}`,
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -127,8 +127,8 @@ const removeInvalidChars = (UUID) => {
     return UUID.replace(/\-/g,'')
 }
     
-const createDevicePromise = (gatewayUUID, deviceId) => {
-    let path = `/${removeInvalidChars(gatewayUUID)}/devices`;
+const createDevicePromise = (application, deviceId) => {
+    let path = `/devices`;
     let clearedDeviceId=removeInvalidChars(deviceId);
     let body = {
         "id": clearedDeviceId.substring(clearedDeviceId.length - 16),
@@ -136,11 +136,11 @@ const createDevicePromise = (gatewayUUID, deviceId) => {
         "description": "knot thing",
         "active": true
     }
-    return getPostPromise(path, body, application);
+    return getPostPromise(path, body, removeInvalidChars(application));
 }
 
 const getDeviceCredentialsPromise = (application, deviceGuid) => {
-    return getGetPromise(`/deviceCredentials/${deviceGuid}`, application);
+    return getGetPromise(`/deviceCredentials/${deviceGuid}`, removeInvalidChars(application));
 }
 
 // **************** APLICATION ****************
