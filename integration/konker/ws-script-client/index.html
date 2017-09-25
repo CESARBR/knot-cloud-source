@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO Emulator</title>
+    <style>
+      * { box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      body input { margin-left: 5px; margin-bottom: 10px; }
+      form textarea { padding: 10px; width: 50%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; position: absolute; }
+    </style>
+  </head>
+  <body>
+    <input id="identifyGW" type="radio" value="identity">Autenticar Gateway</input>
+    <input id="device" type="radio" value="updateGatewayDeviceMapping">Criar Device</input>
+    <input id="data" type="radio" value="data">Enviar Mensagem</input>
+    <form action="">
+      <textarea id="m" rows="4" cols="50"></textarea>
+      <button>Send</button>
+    </form>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      $(function () {
+        var socket = io();
+        $('form').submit(function(){
+          var obj = JSON.parse($('#m').val());
+          socket.emit($('input[type=radio]:checked').val(), obj);
+          return false;
+        });
+        
+        socket.on('updateGatewayDeviceMapping', function(msg){
+          $('#messages').append($('<li>').text(msg));
+        });
+      });
+
+      $('#device').click(function() {
+        $('#data').removeAttr('checked');
+        $('#identifyGW').removeAttr('checked');
+        $('#m').val("{\"gatewayUUID\":\"215b0bf5-d82d-44d0-be49-596cb9f40000\",\"mappings\":[{\"thingUUID\":\"215b0bf5-d82d-44d0-be49-596cb9f40004\",\"gatewayUUID\":\"215b0bf5-d82d-44d0-be49-596cb9f40000\",\"mapping\":[\"215b0bf5-d82d-44d0-be49-596cb9f40000\", \"215b0bf5-d82d-44d0-be49-596cb9f40004\"]}]}")
+      });
+
+      $('#data').click(function() {
+        $('#device').removeAttr('checked');
+        $('#identifyGW').removeAttr('checked');
+        $('#m').val("{\"uuid\":\"215b0bf5-d82d-44d0-be49-596cb9f40000\",\"source\":\"215b0bf5-d82d-44d0-be49-596cb9f40004\",\"data\":{\"sensor_id\":2,\"value\":false,\"uuid\":\"215b0bf5-d82d-44d0-be49-596cb9f40004\",\"token\":\"01f8385738b72ea78302c4ee35df41c69c7c0c4f\"}}")
+      });
+
+      $('#identifyGW').click(function() {
+        $('#device').removeAttr('checked');
+        $('#data').removeAttr('checked');
+        $('#m').val(" { \"uuid\": \"215b0bf5-d82d-44d0-be49-596cb9f40000\", \"token\": \"3499abc672600858acef50ac6c920ea34a976165\" }")
+      });
+    </script>
+  </body>
+</html>

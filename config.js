@@ -56,8 +56,11 @@ if (process.env.ALIAS_SERVER_URI && process.env.ALIAS_SERVER_URI !== '') {
 }
 
 module.exports = {
+  konkerAPI : {
+    host : "https://api.techlab.konkerlabs.net"
+  },
   mongo: {
-    databaseUrl: process.env.MONGODB_URI
+    databaseUrl: "mongodb://localhost:27017/skynet"
   },
   port: parseInt(process.env.PORT) || 3000,
   tls: {
