@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Socket.IO chat</title>
+    <title>Socket.IO Emulator</title>
     <style>
       * { box-sizing: border-box; }
       body { font: 13px Helvetica, Arial; }
@@ -11,6 +11,7 @@
     </style>
   </head>
   <body>
+    <input id="identifyGW" type="radio" value="identity">Autenticar Gateway</input>
     <input id="device" type="radio" value="updateGatewayDeviceMapping">Criar Device</input>
     <input id="data" type="radio" value="data">Enviar Mensagem</input>
     <form action="">
@@ -36,12 +37,20 @@
 
       $('#device').click(function() {
         $('#data').removeAttr('checked');
-        $('#m').val("{\"gatewayUUID\":\"efc64442-5aab-4cce-8ffb-1a2e7a580000\",\"mappings\":[{\"thingUUID\":\"efc64442-5aab-4cce-8ffb-1a2e7a580001\",\"gatewayUUID\":\"efc64442-5aab-4cce-8ffb-1a2e7a580000\",\"mapping\":[\"efc64442-5aab-4cce-8ffb-1a2e7a580000\", \"efc64442-5aab-4cce-8ffb-1a2e7a580001\"]}]}")
+        $('#identifyGW').removeAttr('checked');
+        $('#m').val("{\"gatewayUUID\":\"215b0bf5-d82d-44d0-be49-596cb9f40000\",\"mappings\":[{\"thingUUID\":\"215b0bf5-d82d-44d0-be49-596cb9f40004\",\"gatewayUUID\":\"215b0bf5-d82d-44d0-be49-596cb9f40000\",\"mapping\":[\"215b0bf5-d82d-44d0-be49-596cb9f40000\", \"215b0bf5-d82d-44d0-be49-596cb9f40004\"]}]}")
       });
 
       $('#data').click(function() {
         $('#device').removeAttr('checked');
-        $('#m').val("{\"uuid\":\"f7b6397c-8912-44d4-b095-e8725fdd0000\",\"source\":\"efc64442-5aab-4cce-8ffb-1a2e7a580001\",\"data\":{\"sensor_id\":2,\"value\":false,\"uuid\":\"efc64442-5aab-4cce-8ffb-1a2e7a580001\",\"token\":\"4939536befabfd6523927ce2e0a45a43b2482e0d\"}}")
+        $('#identifyGW').removeAttr('checked');
+        $('#m').val("{\"uuid\":\"215b0bf5-d82d-44d0-be49-596cb9f40000\",\"source\":\"215b0bf5-d82d-44d0-be49-596cb9f40004\",\"data\":{\"sensor_id\":2,\"value\":false,\"uuid\":\"215b0bf5-d82d-44d0-be49-596cb9f40004\",\"token\":\"01f8385738b72ea78302c4ee35df41c69c7c0c4f\"}}")
+      });
+
+      $('#identifyGW').click(function() {
+        $('#device').removeAttr('checked');
+        $('#data').removeAttr('checked');
+        $('#m').val(" { \"uuid\": \"215b0bf5-d82d-44d0-be49-596cb9f40000\", \"token\": \"3499abc672600858acef50ac6c920ea34a976165\" }")
       });
     </script>
   </body>
