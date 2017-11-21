@@ -8,3 +8,14 @@ services:
       - '3000:3000'
       - '1883:1883'
       - '5683:5683/udp'
+  fog:
+    build: .
+    image: knot/fog
+    container_name: fog
+    environment:
+      - DEBUG=*
+      - KNOT_INSTANCE_TYPE=gateway
+    ports:
+      - '3001:3000'
+      - '1884:1883'
+      - '5684:5683/udp'
