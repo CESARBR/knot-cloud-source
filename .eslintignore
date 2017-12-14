@@ -1,0 +1,12 @@
+**/*{.,-}min.js
+config.js
+server.js
+newrelic.js
+worker.js
+bin
+node_modules
+lib
+src
+forever
+integration
+test

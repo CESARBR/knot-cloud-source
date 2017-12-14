@@ -66,13 +66,22 @@
   "scripts": {
     "start": "node ${NODE_FLAGS} server.js --http --mqtt --coap",
     "integration-test": "./run-integration-tests.sh",
-    "test": "istanbul cover _mocha -- -R spec --require coffee-coverage/register-istanbul"
+    "test": "istanbul cover _mocha -- -R spec --require coffee-coverage/register-istanbul",
+    "lint": "eslint ."
   },
+  "pre-commit": [
+    "lint"
+  ],
   "main": "server.js",
   "devDependencies": {
     "chai": "^3.3.0",
     "coffee-coverage": "^0.6.3",
     "coffee-script": "^1.10.0",
+    "eslint": "4.9.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "2.7.0",
+    "eslint-plugin-jsx-a11y": "6.0.2",
+    "eslint-plugin-react": "7.4.0",
     "fakeredis": "^0.3.4",
     "istanbul": "^0.3.20",
     "meshblu-http": "^3.7.0",
@@ -82,6 +91,7 @@
     "mocha": "^2.3.3",
     "mocha-istanbul": "^0.2.0",
     "node-mocks-http": "^1.5.0",
+    "pre-commit": "^1.2.2",
     "sinon": "^1.16.1",
     "sinon-chai": "^2.8.0"
   },
