@@ -4,6 +4,14 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies
   .command({
     command: 'data <thing_uuid>',
     desc: 'Returns data from cloud',
+    builder: (yargs) => {
+      yargs
+        .option('token', {
+          alias: 't',
+          describe: 'owner token',
+          demandOption: true,
+        })
+    },
     handler: (argv) => {
       const options = {
         host: argv.server,

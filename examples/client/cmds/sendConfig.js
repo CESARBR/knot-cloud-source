@@ -6,6 +6,11 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies
     desc: 'Updates the <sensor_id> configuration in <thing_uuid>',
     builder: (yargs) => {
       yargs
+        .option('token', {
+          alias: 't',
+          describe: 'owner token',
+          demandOption: true,
+        })
         .option('event-flags', {
           alias: 'f',
           describe: 'KNoT event flags, for more information consult knotd documentation',

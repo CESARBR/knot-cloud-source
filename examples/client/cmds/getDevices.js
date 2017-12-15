@@ -4,6 +4,14 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies
   .command({
     command: 'devices',
     desc: 'Returns the devices from all gateways',
+    builder: (yargs) => {
+      yargs
+        .option('token', {
+          alias: 't',
+          describe: 'owner token',
+          demandOption: true,
+        })
+    },
     handler: (argv) => {
       const conn = meshblu.createConnection({
         server: argv.server,
