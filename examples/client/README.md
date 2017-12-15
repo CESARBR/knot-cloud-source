@@ -7,6 +7,10 @@ Application that provides a CLI to the KNoT Cloud.
 To show a list of available commands:
 > `node client/cli.js -h`
 
+To create a thing in your gateway use:
+
+> `node client/cli.js -s 127.0.0.1 -u a585b687-1166-4dab-a4e8-5654274f0000 register thing1`
+
 To get the things from your gateways use:
 > `node client/cli.js -u a585b687-1166-4dab-a4e8-5654274f0000 -t 9d9e193c7bb3f8c1c45e28524f2d5cc353bcbe4b devices`
 

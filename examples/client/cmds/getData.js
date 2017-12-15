@@ -4,6 +4,14 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies
   .command({
     command: 'get-data <thing_uuid> <sensor_id>',
     desc: 'Requests the current value of <sensor_id> from <thing_uuid>',
+    builder: (yargs) => {
+      yargs
+        .option('token', {
+          alias: 't',
+          describe: 'owner token',
+          demandOption: true,
+        })
+    },
     handler: (argv) => {
       const conn = meshblu.createConnection({
         server: argv.server,
