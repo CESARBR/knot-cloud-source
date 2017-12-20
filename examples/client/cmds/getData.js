@@ -2,7 +2,7 @@
 const meshblu = require('meshblu');
 require('yargs') // eslint-disable-line import/no-extraneous-dependencies
   .command({
-    command: 'get-data <thing_uuid> <sensor_id>',
+    command: 'getdata <thing_uuid> <sensor_id>',
     desc: 'Requests the current value of <sensor_id> from <thing_uuid>',
     builder: (yargs) => {
       yargs
@@ -34,11 +34,13 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies
           console.log(`Online: ${JSON.stringify(result.online, null, 2)}`);
           console.log(`Sensor ID: ${JSON.stringify(result.get_data[0].sensor_id, null, 2)}`);
           console.log();
+          conn.close(() => {});
         });
       });
 
       conn.on('notReady', () => {
         console.log('Connection not authorized');
+        conn.close(() => {});
       });
     },
   });
