@@ -2,7 +2,35 @@
 
 Application that provides a CLI to the KNoT Cloud.
 
-## How to
+## How to setup Meshblu fog on local machine
+
+This tutorial configures the knot-cloud-source as KNoT fog and uses knot-test.cesar.org.br as cloud service.
+
+1. Create the user by making a POST request to /devices/user on the cloud.
+
+2. Create the gateway by making a POST request to /devices on the cloud. In this request is needed to pass the value "gateway" as ```type``` and user UUID (returned in the previous step) as ```owner``` in the body request.
+
+3. In ```knot-cloud-source/config.js```, replace ```uuid``` and ```token``` with the gateway credentials you just received in the step 2.
+
+```
+parentConnection: {
+  uuid: <gateway UUID>,
+  token: <gateway Token>,
+  server: 'knot-test.cesar.org.br',
+  port: 3000
+  knotCloudUuid: '<gateway UUID>'
+}
+```
+
+4. Install all dependencies, running:
+
+> `npm install`
+
+5. Then, run the cloud:
+
+> `node server.js --http`
+
+## How to use CLI Application
 
 Change to directory `examples/client` and create a file named `config/local.json` with your cloud
 configurations. Following there is an example of its contents:

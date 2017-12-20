@@ -20,6 +20,11 @@ yargs // eslint-disable-line no-unused-expressions
     demandOption: !config.has('cloud.uuid'),
     default: config.has('cloud.uuid') ? config.get('cloud.uuid') : undefined,
   })
+  .option('token', {
+    alias: 't',
+    describe: 'owner token',
+    demandOption: false,
+  })
   .commandDir('cmds')
   .demandCommand()
   .strict()
