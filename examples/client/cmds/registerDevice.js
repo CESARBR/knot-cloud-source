@@ -1,5 +1,6 @@
+/* eslint-disable no-console */
 const http = require('http');
-require('yargs')
+require('yargs') // eslint-disable-line import/no-extraneous-dependencies
   .command({
     command: 'register <thing_name>',
     desc: 'Register a new device on cloud/fog',
@@ -14,13 +15,12 @@ require('yargs')
         },
       };
       const reqData = {
-        'owner': argv.uuid,
-        'name': argv.thing_name,
-        'type': 'KNOTDevice',
+        owner: argv.uuid,
+        name: argv.thing_name,
+        type: 'KNOTDevice',
       };
       const req = http.request(options, (res) => {
         let rawData = '';
-        let error;
         console.log('Registering a thing...');
         if (res.statusCode !== 201) {
           console.error(`Request failed.\nStatus Code: ${res.statusCode}\n`);
@@ -28,7 +28,7 @@ require('yargs')
           return;
         }
         res.setEncoding('utf8');
-        res.on('data', (chunk) => { rawData += chunk });
+        res.on('data', (chunk) => { rawData += chunk; });
         res.on('end', () => {
           let thingData;
           try {
@@ -39,17 +39,16 @@ require('yargs')
             console.log(`Owner: ${thingData.owner}`);
             console.log(`Token: ${thingData.token}`);
             console.log(`Online: ${thingData.online}`);
-          } catch(e) {
+          } catch (e) {
             console.error(e.message);
           }
         });
       });
 
       req.on('error', (err) => {
-        console.error(`Got error: ${err.message}`) 
+        console.error(`Got error: ${err.message}`);
       });
-    
       req.write(JSON.stringify(reqData));
       req.end();
-    }
-  })  
+    },
+  });
