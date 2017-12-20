@@ -37,11 +37,13 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies
               console.log();
             }
           }
+          conn.close(() => {});
         });
       });
 
       conn.on('notReady', () => {
         console.log('Connection not authorized');
+        conn.close(() => {});
       });
     },
   });

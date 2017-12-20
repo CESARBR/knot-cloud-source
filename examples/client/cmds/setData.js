@@ -36,11 +36,13 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies
           console.log(`ID: ${JSON.stringify(result.set_data[0].sensor_id, null, 2)}`);
           console.log(`Value: ${JSON.stringify(result.set_data[0].value, null, 2)}`);
           console.log();
+          conn.close(() => {});
         });
       });
 
       conn.on('notReady', () => {
         console.log('Connection not authorized');
+        conn.close(() => {});
       });
     },
   });

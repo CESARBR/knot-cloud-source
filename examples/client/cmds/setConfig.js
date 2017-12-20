@@ -2,7 +2,7 @@
 const meshblu = require('meshblu');
 require('yargs') // eslint-disable-line import/no-extraneous-dependencies
   .command({
-    command: 'config <thing_uuid> <sensor_id>',
+    command: 'setconfig <thing_uuid> <sensor_id>',
     desc: 'Updates the <sensor_id> configuration in <thing_uuid>',
     builder: (yargs) => {
       yargs
@@ -60,11 +60,13 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies
           console.log(`Online: ${JSON.stringify(result.online, null, 2)}`);
           console.log(`Config: ${JSON.stringify(result.config, null, 2)}`);
           console.log();
+          conn.close(() => {});
         });
       });
 
       conn.on('notReady', () => {
         console.log('Connection not authorized');
+        conn.close(() => {});
       });
     },
   });
