@@ -48,7 +48,7 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies
           config: [{
             sensor_id: argv.sensor_id,
             event_flags: argv.eventFlags,
-            time_sec: argv.timeSec,
+            time_sec: argv.time,
             lower_limit: argv.lowerLimit,
             upper_limit: argv.upperLimit,
           }],
