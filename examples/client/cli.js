@@ -16,6 +16,11 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies, no-un
     describe: 'owner UUID',
     demandOption: true,
   })
+  .option('token', {
+    alias: 't',
+    describe: 'owner token',
+    demandOption: false,
+  })
   .commandDir('cmds')
   .demandCommand()
   .alias('h', 'help')
