@@ -2,10 +2,50 @@
 
 Application that provides a CLI to the KNoT Cloud.
 
-## How to
+## How to setup Meshblu fog on local machine
 
-Change to directory `examples/client` and create a file named `config/local.json` with your cloud
-configurations. Following there is an example of its contents:
+This tutorial configures the knot-cloud-source as KNoT fog and uses 
+knot-test.cesar.org.br as cloud service.
+
+1. Create the user by making a POST request to `/devices/user` on the cloud.
+
+2. Create the gateway by making a POST request to `/devices` on the cloud. In 
+this request pass gateway as the device type and the user UUID returned in the 
+previous step as the device owner, like the example showed below:
+
+```json
+{
+  "type": "gateway",
+  "owner": <user UUID>
+}
+```
+
+3. In `knot-cloud-source/config.js`, replace `uuid`, `token` and 
+`knotCloudUuid` with the gateway credentials you just received in the step 2.
+
+```
+parentConnection: {
+  uuid: <gateway UUID>,
+  token: <gateway Token>,
+  server: 'knot-test.cesar.org.br',
+  port: 3000
+  knotCloudUuid: '<gateway UUID>'
+}
+```
+
+4. Install all dependencies, running:
+
+> `npm install`
+
+5. Then, run the cloud:
+
+> `node server.js --http`
+
+## How to use CLI Application
+
+Change to directory `examples/client` and create a file named 
+`config/local.json` with your cloud configurations. Following there is an
+example of its contents:
 
 ```json
 {
@@ -18,7 +58,8 @@ configurations. Following there is an example of its contents:
 }
 ```
 
-If you run without this config file you can set the cloud configurations using the following options:
+If you run without this config file you can set the cloud configurations using 
+the following options:
 
 ```
 --server or -s
@@ -27,8 +68,8 @@ If you run without this config file you can set the cloud configurations using t
 --token or -t
 ```
 
-NOTE: If you run `cli.js` on a gateway you don't need to create a `config/local.json` but you need to
-set the option -s to the cloud.
+NOTE: If you run `cli.js` on a gateway you don't need to create a
+`config/local.json` but you need to set the option -s to the cloud.
 
 To show a list of available commands:
 ```bash
@@ -46,7 +87,8 @@ To get the things from your gateways use:
 node cli.js devices
 ```
 
-With the return of command above use `getdata` and `data` to see the data stored on cloud:
+With the return of command above use `getdata` and `data` to see the data
+stored on cloud:
 ```bash
 node cli.js getdata 3a14a87f-45ac-4c1c-8620-0e6c31520007 1
 ```
@@ -56,7 +98,8 @@ The command above are requesting data to sensor with ID 1 from thing `3a14a87f-4
 node cli.js data 3a14a87f-45ac-4c1c-8620-0e6c31520007
 ```
 
-And the command above return the list of data from thing `3a14a87f-45ac-4c1c-8620-0e6c31520007`
+And the command above return the list of data from thing 
+`3a14a87f-45ac-4c1c-8620-0e6c31520007`
 
 You can set the data too:
 ```bash
