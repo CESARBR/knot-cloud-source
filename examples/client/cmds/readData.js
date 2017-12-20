@@ -10,7 +10,7 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies
           alias: 't',
           describe: 'owner token',
           demandOption: true,
-        })
+        });
     },
     handler: (argv) => {
       const options = {
