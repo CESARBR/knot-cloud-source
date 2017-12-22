@@ -4,7 +4,16 @@ services:
     build: .
     image: knot/cloud
     container_name: cloud
+    environment:
+      - DEBUG=*
+      - MONGODB_URI=mongodb://database/knot_cloud_dev
     ports:
       - '3000:3000'
       - '1883:1883'
       - '5683:5683/udp'
+
+  database:
+    image: mongo
+    container_name: cloud_db
+    ports:
+      - '27017:27017'
