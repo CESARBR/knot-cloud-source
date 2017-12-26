@@ -50,3 +50,19 @@ but you can change it by using the options:
  as an example you can change the config to send sensor data each 10 seconds
 
 > `node client/cli.js -s 172.24.15.213  -u a585b687-1166-4dab-a4e8-5654274f0000 -t 9d9e193c7bb3f8c1c45e28524f2d5cc353bcbe4b config 3a14a87f-45ac-4c1c-8620-0e6c31520007 1 true -f 1 -T 10`
+
+Create a subscription to a device's messages through command below.
+
+> `node cli.js -s 172.24.15.213 -u a585b687-1166-4dab-a4e8-5654274f0000 -t 9d9e193c7bb3f8c1c45e28524f2d5cc353bcbe4b subscribe 3a14a87f-45ac-4c1c-8620-0e6c31520007`
+
+To limit subscriptions, you can pass the option --type with one or more subscription's types. If none is specified, the CLI takes sent type as default.
+
+There are three types:
+
+- broadcast: broadcast messages sent by the device and messages the device receives.
+- received: messages received by the device.
+- sent: messages sent by the device.
+
+An example of limited subscription is shown below.
+
+> `node cli.js -s 172.24.15.213 -u a585b687-1166-4dab-a4e8-5654274f0000 -t 9d9e193c7bb3f8c1c45e28524f2d5cc353bcbe4b subscribe 3a14a87f-45ac-4c1c-8620-0e6c31520007 --type received sent`
