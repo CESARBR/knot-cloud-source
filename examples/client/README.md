@@ -134,3 +134,25 @@ but you can change it by using the options:
 ```bash
 node cli.js setconfig 3a14a87f-45ac-4c1c-8620-0e6c31520007 1 -f 1 -T 10
 ```
+
+Create a subscription to a device's messages using the command below.
+
+```bash
+node cli.js subscribe 3a14a87f-45ac-4c1c-8620-0e6c31520007
+```
+
+To limit subscriptions, you can pass the option --type with one or more
+subscription types. If none is specified, the CLI takes `sent` type as default.
+
+There are three types:
+
+- broadcast: broadcast messages sent by the device and messages the device
+  receives.
+- received: messages received by the device.
+- sent: messages sent by the device.
+
+An example of limited subscription is shown below.
+
+```bash
+node cli.js subscribe 3a14a87f-45ac-4c1c-8620-0e6c31520007 --type received sent
+```
