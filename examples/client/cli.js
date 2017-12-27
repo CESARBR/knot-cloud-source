@@ -1,20 +1,24 @@
-require('yargs') // eslint-disable-line import/no-extraneous-dependencies, no-unused-expressions
+const config = require('config'); // eslint-disable-line import/no-extraneous-dependencies
+const yargs = require('yargs'); // eslint-disable-line import/no-extraneous-dependencies
+
+yargs // eslint-disable-line no-unused-expressions
   .option('server', {
     alias: 's',
     describe: 'cloud server hostname',
-    demandOption: true,
-    default: 'knot-test.cesar.org.br',
+    demandOption: !config.has('cloud.serverName'),
+    default: config.has('cloud.serverName') ? config.get('cloud.serverName') : undefined,
   })
   .option('port', {
     alias: 'p',
     describe: 'cloud server port',
-    demandOption: true,
-    default: '3000',
+    demandOption: !config.has('cloud.port'),
+    default: config.has('cloud.port') ? config.get('cloud.port') : undefined,
   })
   .option('uuid', {
     alias: 'u',
     describe: 'owner UUID',
-    demandOption: true,
+    demandOption: !config.has('cloud.uuid'),
+    default: config.has('cloud.uuid') ? config.get('cloud.uuid') : undefined,
   })
   .commandDir('cmds')
   .demandCommand()
