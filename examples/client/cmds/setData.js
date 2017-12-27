@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
 const meshblu = require('meshblu');
+const config = require('config'); // eslint-disable-line import/no-extraneous-dependencies
+
 require('yargs') // eslint-disable-line import/no-extraneous-dependencies
   .command({
     command: 'setdata <thing_uuid> <sensor_id> <sensor_value>',
@@ -9,7 +11,8 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies
         .option('token', {
           alias: 't',
           describe: 'owner token',
-          demandOption: true,
+          demandOption: !config.has('cloud.token'),
+          default: config.has('cloud.token') ? config.get('cloud.token') : undefined,
         });
     },
     handler: (argv) => {

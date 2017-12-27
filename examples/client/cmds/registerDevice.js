@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 const http = require('http');
+
 require('yargs') // eslint-disable-line import/no-extraneous-dependencies
   .command({
     command: 'register <thing_name>',
