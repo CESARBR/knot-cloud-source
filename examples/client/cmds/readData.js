@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
 const http = require('http');
+const config = require('config'); // eslint-disable-line import/no-extraneous-dependencies
+
 require('yargs') // eslint-disable-line import/no-extraneous-dependencies
   .command({
     command: 'data <thing_uuid>',
@@ -9,7 +11,8 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies
         .option('token', {
           alias: 't',
           describe: 'owner token',
-          demandOption: true,
+          demandOption: !config.has('cloud.token'),
+          default: config.has('cloud.token') ? config.get('cloud.token') : undefined,
         });
     },
     handler: (argv) => {
