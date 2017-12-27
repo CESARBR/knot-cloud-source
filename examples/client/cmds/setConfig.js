@@ -1,5 +1,9 @@
 /* eslint-disable no-console */
 const meshblu = require('meshblu');
+const fs = require('fs');
+const config = require('../../../config');
+
+const data = JSON.parse(fs.readFileSync('/etc/knot/gatewayConfig.json', 'utf-8'));
 require('yargs') // eslint-disable-line import/no-extraneous-dependencies
   .command({
     command: 'setconfig <thing_uuid> <sensor_id>',
@@ -9,7 +13,8 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies
         .option('token', {
           alias: 't',
           describe: 'owner token',
-          demandOption: true,
+          demandOption: config.knotInstanceType === 'cloud',
+          default: config.knotInstanceType === 'gateway' ? data.cloud.token : null,
         })
         .option('event-flags', {
           alias: 'f',
