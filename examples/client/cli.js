@@ -18,6 +18,7 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies, no-un
   })
   .commandDir('cmds')
   .demandCommand()
+  .strict()
   .alias('h', 'help')
   .help()
   .argv;
