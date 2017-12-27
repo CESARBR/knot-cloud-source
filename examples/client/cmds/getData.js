@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
 const meshblu = require('meshblu');
+const config = require('../config');
+
 require('yargs') // eslint-disable-line import/no-extraneous-dependencies
   .command({
     command: 'getdata <thing_uuid> <sensor_id>',
@@ -9,7 +11,8 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies
         .option('token', {
           alias: 't',
           describe: 'owner token',
-          demandOption: true,
+          demandOption: config.token === '',
+          default: config.token,
         });
     },
     handler: (argv) => {

@@ -1,20 +1,23 @@
+const config = require('./config');
+
 require('yargs') // eslint-disable-line import/no-extraneous-dependencies, no-unused-expressions
   .option('server', {
     alias: 's',
     describe: 'cloud server hostname',
-    demandOption: true,
-    default: 'knot-test.cesar.org.br',
+    demandOption: config.serverName === '',
+    default: config.serverName,
   })
   .option('port', {
     alias: 'p',
     describe: 'cloud server port',
-    demandOption: true,
-    default: '3000',
+    demandOption: config.port === '',
+    default: config.port,
   })
   .option('uuid', {
     alias: 'u',
     describe: 'owner UUID',
-    demandOption: true,
+    demandOption: config.uuid === '',
+    default: config.uuid,
   })
   .commandDir('cmds')
   .demandCommand()
