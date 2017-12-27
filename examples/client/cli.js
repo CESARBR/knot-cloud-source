@@ -22,6 +22,7 @@ yargs // eslint-disable-line no-unused-expressions
   })
   .commandDir('cmds')
   .demandCommand()
+  .strict()
   .alias('h', 'help')
   .help()
   .argv;
