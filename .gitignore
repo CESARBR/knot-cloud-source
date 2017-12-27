@@ -26,3 +26,6 @@ test-forwarded-for.sh
 # dev files
 .*-dev
 *.dockerfile-dev
+
+# Client application files
+examples/client/config/local*.json

@@ -4,30 +4,68 @@ Application that provides a CLI to the KNoT Cloud.
 
 ## How to
 
+Change to directory `examples/client` and create a file `config/local.json` with your cloud
+configurations.
+This is an example of a file:
+
+```json
+{
+  "cloud": {
+    "serverName": "localhost",
+    "port": 3000,
+    "uuid": "44a728ec-4be3-44ce-84e5-6c6b1c500000",
+    "token": "6050d4c4d3e4782c04971f2d84d190e2d26a51ef"
+  }
+}
+```
+
+If you run without this config file you can set the cloud configurations using the following options:
+```
+--server or -s
+--port or -p
+--uuid or -u
+--token or -t
+```
+
+OBS: If you run `cli.js` on a gateway you don't need to create a `config/local.json` but you need to set the option -s to the cloud
+
 To show a list of available commands:
-> `node client/cli.js -h`
+```bash
+node cli.js -h
+```
 
 To create a thing in your gateway use:
 
-> `node client/cli.js -s 127.0.0.1 -u a585b687-1166-4dab-a4e8-5654274f0000 register thing1`
+```bash
+node cli.js register thing1
+```
 
 To get the things from your gateways use:
-> `node client/cli.js -u a585b687-1166-4dab-a4e8-5654274f0000 -t 9d9e193c7bb3f8c1c45e28524f2d5cc353bcbe4b devices`
+```bash
+node cli.js devices
+```
 
 With the return of command above use `getdata` and `data` to see the data stored on cloud:
-> `node client/cli.js -s 172.24.15.213  -u a585b687-1166-4dab-a4e8-5654274f0000 -t 9d9e193c7bb3f8c1c45e28524f2d5cc353bcbe4b getdata 3a14a87f-45ac-4c1c-8620-0e6c31520007 1`
-
+```bash
+node cli.js getdata 3a14a87f-45ac-4c1c-8620-0e6c31520007 1
+```
 The command above are requesting data to sensor with ID 1 from thing `3a14a87f-45ac-4c1c-8620-0e6c31520007`
 
-> `node client/cli.js -s 172.24.15.213  -u a585b687-1166-4dab-a4e8-5654274f0000 -t 9d9e193c7bb3f8c1c45e28524f2d5cc353bcbe4b data 3a14a87f-45ac-4c1c-8620-0e6c31520007 1`
+```bash
+node cli.js data 3a14a87f-45ac-4c1c-8620-0e6c31520007
+```
 
-And the command above return the list of data from sensor 1
+And the command above return the list of data from thing `3a14a87f-45ac-4c1c-8620-0e6c31520007`
 
 You can set the data too:
-> `node client/cli.js -s 172.24.15.213  -u a585b687-1166-4dab-a4e8-5654274f0000 -t 9d9e193c7bb3f8c1c45e28524f2d5cc353bcbe4b setdata 3a14a87f-45ac-4c1c-8620-0e6c31520007 1 true`
+```bash
+node cli.js setdata 3a14a87f-45ac-4c1c-8620-0e6c31520007 1 true
+```
 
 You can even update the thing's config:
-> `node client/cli.js -s 172.24.15.213  -u a585b687-1166-4dab-a4e8-5654274f0000 -t 9d9e193c7bb3f8c1c45e28524f2d5cc353bcbe4b setconfig 3a14a87f-45ac-4c1c-8620-0e6c31520007 1 true`
+```bash
+node cli.js setconfig 3a14a87f-45ac-4c1c-8620-0e6c31520007 1
+```
 
 The default config being sent is:
 ```json
@@ -49,4 +87,6 @@ but you can change it by using the options:
 
  as an example you can change the config to send sensor data each 10 seconds
 
-> `node client/cli.js -s 172.24.15.213  -u a585b687-1166-4dab-a4e8-5654274f0000 -t 9d9e193c7bb3f8c1c45e28524f2d5cc353bcbe4b config 3a14a87f-45ac-4c1c-8620-0e6c31520007 1 true -f 1 -T 10`
+```bash
+node cli.js setconfig 3a14a87f-45ac-4c1c-8620-0e6c31520007 1 -f 1 -T 10
+```

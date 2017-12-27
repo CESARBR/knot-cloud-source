@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
 const meshblu = require('meshblu');
+const config = require('config'); // eslint-disable-line import/no-extraneous-dependencies
+
 require('yargs') // eslint-disable-line import/no-extraneous-dependencies
   .command({
     command: 'devices',
@@ -9,7 +11,8 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies
         .option('token', {
           alias: 't',
           describe: 'owner token',
-          demandOption: true,
+          demandOption: !config.has('cloud.token'),
+          default: config.has('cloud.token') ? config.get('cloud.token') : undefined,
         });
     },
     handler: (argv) => {
@@ -25,7 +28,7 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies
         conn.devices({
           gateways: ['*'],
         }, (result) => {
-          if (result.error) {
+          if (result.error || result.Error) {
             console.log(result);
           } else {
             for (let i = 0; i < result.length; i += 1) {
