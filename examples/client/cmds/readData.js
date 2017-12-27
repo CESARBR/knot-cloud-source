@@ -1,5 +1,12 @@
 /* eslint-disable no-console */
 const http = require('http');
+const fs = require('fs');
+const config = require('../../../config');
+
+let data;
+if (config.knotInstanceType === 'gateway') {
+  data = JSON.parse(fs.readFileSync('/etc/knot/gatewayConfig.json', 'utf-8'));
+}
 require('yargs') // eslint-disable-line import/no-extraneous-dependencies
   .command({
     command: 'data <thing_uuid>',
@@ -9,7 +16,8 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies
         .option('token', {
           alias: 't',
           describe: 'owner token',
-          demandOption: true,
+          demandOption: config.knotInstanceType === 'cloud',
+          default: config.knotInstanceType === 'gateway' ? data.cloud.token : null,
         });
     },
     handler: (argv) => {

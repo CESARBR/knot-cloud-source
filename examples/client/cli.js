@@ -1,9 +1,16 @@
+const config = require('../../config');
+const fs = require('fs');
+
+let data;
+if (config.knotInstanceType === 'gateway') {
+  data = JSON.parse(fs.readFileSync('/etc/knot/gatewayConfig.json', 'utf-8'));
+}
 require('yargs') // eslint-disable-line import/no-extraneous-dependencies, no-unused-expressions
   .option('server', {
     alias: 's',
     describe: 'cloud server hostname',
-    demandOption: true,
-    default: 'knot-test.cesar.org.br',
+    demandOption: config.knotInstanceType === 'cloud',
+    default: config.knotInstanceType === 'cloud' ? 'knot-test.cesar.org.br' : data.cloud.serverName,
   })
   .option('port', {
     alias: 'p',
@@ -14,7 +21,8 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies, no-un
   .option('uuid', {
     alias: 'u',
     describe: 'owner UUID',
-    demandOption: true,
+    demandOption: config.knotInstanceType === 'cloud',
+    default: config.knotInstanceType === 'gateway' ? data.cloud.uuid : null,
   })
   .commandDir('cmds')
   .demandCommand()

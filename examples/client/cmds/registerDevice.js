@@ -1,24 +1,46 @@
 /* eslint-disable no-console */
 const http = require('http');
+const fs = require('fs');
+const config = require('../../../config');
 require('yargs') // eslint-disable-line import/no-extraneous-dependencies
   .command({
     command: 'register <thing_name>',
     desc: 'Register a new device on cloud/fog',
     handler: (argv) => {
-      const options = {
-        host: argv.server,
-        port: argv.port,
-        path: '/devices',
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
-      const reqData = {
-        owner: argv.uuid,
-        name: argv.thing_name,
-        type: 'KNOTDevice',
-      };
+      let options;
+      let reqData;
+      if (config.knotInstanceType === 'gateway') {
+        const data = JSON.parse(fs.readFileSync('/etc/knot/gatewayConfig.json', 'utf-8'));
+        options = {
+          host: argv.server,
+          port: data.cloud.port,
+          path: '/devices',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        };
+        reqData = {
+          owner: data.cloud.uuid,
+          name: argv.thing_name,
+          type: 'KNOTDevice',
+        };
+      } else {
+        options = {
+          host: argv.server,
+          port: argv.port,
+          path: '/devices',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        };
+        reqData = {
+          owner: argv.uuid,
+          name: argv.thing_name,
+          type: 'KNOTDevice',
+        };
+      }
       const req = http.request(options, (res) => {
         let rawData = '';
         console.log('Registering a thing...');
