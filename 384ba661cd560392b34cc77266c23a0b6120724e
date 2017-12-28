@@ -1,0 +1,395 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8630b2b6_651d6280",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-28T19:11:22Z",
+      "side": 1,
+      "message": "The patch does more than just get options from the configuration file when running in the gateway. Actually, this is just an extra of the patch. What is the main feature it is adding?",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a7cc17f_48d99ef1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-28T19:11:22Z",
+      "side": 1,
+      "message": "This is the extra part, read from gatewayConfig.json (mind the spelling of the file name).\n\nIt reads the user credentials, not with. I would say that it read the configuration parameters, as it is reading more than the user credentials.",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f412b655_c559cd6b",
+        "filename": "examples/client/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-28T19:11:22Z",
+      "side": 1,
+      "message": "Tell the user to create `config/local.json` containing the parameters he wants to be different than default. Put a complete example of the JSON file:\n\n```\n{\n  \"cloud\": {\n    \"serverName\": ...\n    ...\n  }\n}\n```\n\nAlso add examples/client/config/local*.json to .gitignore",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28b3172b_05bda08f",
+        "filename": "examples/client/cli.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-28T19:11:22Z",
+      "side": 1,
+      "message": "See my comments in config.js before continuing.",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72575ad9_98465ec8",
+        "filename": "examples/client/cli.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-28T19:11:22Z",
+      "side": 1,
+      "message": "Test with config.has(\u0027cloud.serverName\u0027)",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "486ad3b0_08547ec7",
+        "filename": "examples/client/cli.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-28T19:11:22Z",
+      "side": 1,
+      "message": "Get with config.get(\u0027cloud.serverName\u0027), but test it before with config.has. If there isn\u0027t a value, set to undefined.",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dbea99f9_095658c8",
+        "filename": "examples/client/cli.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-28T19:11:22Z",
+      "side": 1,
+      "message": "Same here",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "645d9534_8c7bc98b",
+        "filename": "examples/client/cli.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-28T19:11:22Z",
+      "side": 1,
+      "message": "Same here",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33e16f47_39196835",
+        "filename": "examples/client/cmds/getData.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-28T19:11:22Z",
+      "side": 1,
+      "message": "Read my comments in config.js before continuing.",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da1aa39e_68802382",
+        "filename": "examples/client/cmds/getData.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-28T19:11:22Z",
+      "side": 1,
+      "message": "Do the same suggested in cli.js",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d861ff44_9f75a7d9",
+        "filename": "examples/client/cmds/getDevices.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-28T19:11:22Z",
+      "side": 1,
+      "message": "Read my comments in config.js before continuing.",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "22e100e3_a385f04d",
+        "filename": "examples/client/cmds/getDevices.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-28T19:11:22Z",
+      "side": 1,
+      "message": "Do the same suggested in cli.js",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4233429_afe62d3f",
+        "filename": "examples/client/cmds/readData.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-28T19:11:22Z",
+      "side": 1,
+      "message": "Read my comments in config.js before continuing.",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dee41211_5b8477f7",
+        "filename": "examples/client/cmds/readData.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-28T19:11:22Z",
+      "side": 1,
+      "message": "Do the same suggested in cli.js",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ccea27e2_b4400458",
+        "filename": "examples/client/cmds/setConfig.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-28T19:11:22Z",
+      "side": 1,
+      "message": "Read my comments in config.js before continuing.",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a655895_ce177307",
+        "filename": "examples/client/cmds/setConfig.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-28T19:11:22Z",
+      "side": 1,
+      "message": "Do the same suggested in cli.js",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea9c0b8c_3203201e",
+        "filename": "examples/client/cmds/setData.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-28T19:11:22Z",
+      "side": 1,
+      "message": "Read my comments in config.js before continuing.",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5aa3e67_5054740e",
+        "filename": "examples/client/cmds/setData.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-28T19:11:22Z",
+      "side": 1,
+      "message": "Do the same suggested in cli.js",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "31c7218b_b2b269d9",
+        "filename": "examples/client/config.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-28T19:11:22Z",
+      "side": 1,
+      "message": "I was looking at config documentation and noticed that we can write the configuration files in JS and not only in JSON.\n\nRename default.json and replace the contents with this file.",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "01093050_8748bf97",
+        "filename": "examples/client/config.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-28T19:11:22Z",
+      "side": 1,
+      "message": "Call it `gatewayConfigFile`",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2bfd04e7_950810ad",
+        "filename": "examples/client/config.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-28T19:11:22Z",
+      "side": 1,
+      "message": "Put this in a function. Could be readDefaultConfig().\n\nIt should try to read from /etc/knot/gatewayConfig.json but if it doesn\u0027t exist, return the contents of default.json.",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0514cbe5_686739f7",
+        "filename": "examples/client/config.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-28T19:11:22Z",
+      "side": 1,
+      "message": "Remove the comment",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ddcc4051_4ea009ac",
+        "filename": "examples/client/config/default.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-28T19:11:22Z",
+      "side": 1,
+      "message": "In the default configuration don\u0027t include uuid and token. This will make config.has(\u0027cloud.uuid\u0027) return false when the user doesn\u0027t specify.",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
