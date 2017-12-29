@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bf8a909b_0a363f4a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-29T19:43:07Z",
+      "side": 1,
+      "message": "I think that \"Show usage when command is invalid\" is more correct, and I\u0027m not sure if this title that I wrote is. I already fixed the JIRA issue. My bad :P",
+      "revId": "151e6fac2997104c72090aa3dfd9c947ec1167da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2621a6f9_3db97dd8",
+        "filename": "examples/client/cli.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-29T19:43:07Z",
+      "side": 1,
+      "message": "Verify if strict() already does this: https://github.com/yargs/yargs/blob/master/docs/api.md#strictenabledtrue",
+      "revId": "151e6fac2997104c72090aa3dfd9c947ec1167da",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
