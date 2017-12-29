@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "055467da_b1013ad3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T12:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8630b2b6_651d6280",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2a7cc17f_48d99ef1",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2017-12-28T19:11:22Z",
       "side": 1,
       "message": "This is the extra part, read from gatewayConfig.json (mind the spelling of the file name).\n\nIt reads the user credentials, not with. I would say that it read the configuration parameters, as it is reading more than the user credentials.",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2266ea9e_76f0e410",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T12:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a7cc17f_48d99ef1",
       "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "2ff054b7_209bb9c4",
+        "filename": "examples/client/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T12:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f412b655_c559cd6b",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "28b3172b_05bda08f",
         "filename": "examples/client/cli.js",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2017-12-28T19:11:22Z",
       "side": 1,
       "message": "See my comments in config.js before continuing.",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dbbba989_0f3db386",
+        "filename": "examples/client/cli.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T12:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28b3172b_05bda08f",
       "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "6d54f4ea_4722bd67",
+        "filename": "examples/client/cli.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T12:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72575ad9_98465ec8",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "486ad3b0_08547ec7",
         "filename": "examples/client/cli.js",
         "patchSetId": 3
@@ -98,6 +188,24 @@
       "writtenOn": "2017-12-28T19:11:22Z",
       "side": 1,
       "message": "Get with config.get(\u0027cloud.serverName\u0027), but test it before with config.has. If there isn\u0027t a value, set to undefined.",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c8156e4_b77663bc",
+        "filename": "examples/client/cli.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T12:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "486ad3b0_08547ec7",
       "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "511e660c_6e7042aa",
+        "filename": "examples/client/cli.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T12:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbea99f9_095658c8",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "645d9534_8c7bc98b",
         "filename": "examples/client/cli.js",
         "patchSetId": 3
@@ -132,6 +258,24 @@
       "writtenOn": "2017-12-28T19:11:22Z",
       "side": 1,
       "message": "Same here",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d9abcc6_43e2e3e3",
+        "filename": "examples/client/cli.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T12:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "645d9534_8c7bc98b",
       "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "52cadcb5_5a63f4fc",
+        "filename": "examples/client/cmds/getData.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T12:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33e16f47_39196835",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da1aa39e_68802382",
         "filename": "examples/client/cmds/getData.js",
         "patchSetId": 3
@@ -166,6 +328,24 @@
       "writtenOn": "2017-12-28T19:11:22Z",
       "side": 1,
       "message": "Do the same suggested in cli.js",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f8579cb7_93855f01",
+        "filename": "examples/client/cmds/getData.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T12:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da1aa39e_68802382",
       "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "b8ffa5cf_8b8dcb31",
+        "filename": "examples/client/cmds/getDevices.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T12:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d861ff44_9f75a7d9",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "22e100e3_a385f04d",
         "filename": "examples/client/cmds/getDevices.js",
         "patchSetId": 3
@@ -200,6 +398,24 @@
       "writtenOn": "2017-12-28T19:11:22Z",
       "side": 1,
       "message": "Do the same suggested in cli.js",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0c267f6c_fa74befa",
+        "filename": "examples/client/cmds/getDevices.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T12:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22e100e3_a385f04d",
       "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "7bae3ac3_f5d95ed9",
+        "filename": "examples/client/cmds/readData.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T12:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4233429_afe62d3f",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dee41211_5b8477f7",
         "filename": "examples/client/cmds/readData.js",
         "patchSetId": 3
@@ -234,6 +468,24 @@
       "writtenOn": "2017-12-28T19:11:22Z",
       "side": 1,
       "message": "Do the same suggested in cli.js",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39edc5c4_b6fe8b76",
+        "filename": "examples/client/cmds/readData.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T12:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dee41211_5b8477f7",
       "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
@@ -257,6 +509,24 @@
     },
     {
       "key": {
+        "uuid": "3504fe4f_f0794770",
+        "filename": "examples/client/cmds/setConfig.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T12:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccea27e2_b4400458",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8a655895_ce177307",
         "filename": "examples/client/cmds/setConfig.js",
         "patchSetId": 3
@@ -268,6 +538,24 @@
       "writtenOn": "2017-12-28T19:11:22Z",
       "side": 1,
       "message": "Do the same suggested in cli.js",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd7cc39e_6a38af1c",
+        "filename": "examples/client/cmds/setConfig.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T12:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a655895_ce177307",
       "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
@@ -291,6 +579,24 @@
     },
     {
       "key": {
+        "uuid": "f07e60a2_17e64854",
+        "filename": "examples/client/cmds/setData.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T12:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea9c0b8c_3203201e",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f5aa3e67_5054740e",
         "filename": "examples/client/cmds/setData.js",
         "patchSetId": 3
@@ -302,6 +608,24 @@
       "writtenOn": "2017-12-28T19:11:22Z",
       "side": 1,
       "message": "Do the same suggested in cli.js",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "988ec66f_c78e7283",
+        "filename": "examples/client/cmds/setData.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T12:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5aa3e67_5054740e",
       "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
@@ -325,6 +649,24 @@
     },
     {
       "key": {
+        "uuid": "7780ab97_a36a131a",
+        "filename": "examples/client/config.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T12:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31c7218b_b2b269d9",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "01093050_8748bf97",
         "filename": "examples/client/config.js",
         "patchSetId": 3
@@ -336,6 +678,24 @@
       "writtenOn": "2017-12-28T19:11:22Z",
       "side": 1,
       "message": "Call it `gatewayConfigFile`",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8167e3e2_83afb2d3",
+        "filename": "examples/client/config.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T12:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01093050_8748bf97",
       "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
@@ -359,6 +719,24 @@
     },
     {
       "key": {
+        "uuid": "ef937ff7_f8516b1c",
+        "filename": "examples/client/config.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T12:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2bfd04e7_950810ad",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0514cbe5_686739f7",
         "filename": "examples/client/config.js",
         "patchSetId": 3
@@ -376,6 +754,24 @@
     },
     {
       "key": {
+        "uuid": "b6f04777_3ef53f11",
+        "filename": "examples/client/config.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T12:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0514cbe5_686739f7",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ddcc4051_4ea009ac",
         "filename": "examples/client/config/default.json",
         "patchSetId": 3
@@ -387,6 +783,24 @@
       "writtenOn": "2017-12-28T19:11:22Z",
       "side": 1,
       "message": "In the default configuration don\u0027t include uuid and token. This will make config.has(\u0027cloud.uuid\u0027) return false when the user doesn\u0027t specify.",
+      "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49a02240_ecbb90fb",
+        "filename": "examples/client/config/default.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T12:09:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddcc4051_4ea009ac",
       "revId": "384ba661cd560392b34cc77266c23a0b6120724e",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
