@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e8a10b8_e352a530",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-29T17:12:42Z",
+      "side": 1,
+      "message": "\"Allow to\" or simply \"Read\" and \"from a file\"",
+      "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f51f7dc6_0d4fdfe9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-29T17:12:42Z",
+      "side": 1,
+      "message": "\"allows the user to create\"",
+      "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcbf41ce_77e88edc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-29T17:12:42Z",
+      "side": 1,
+      "message": "Put a . in the end. The next line can start after it.",
+      "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1b76570_a71d8bd0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-29T17:12:42Z",
+      "side": 1,
+      "message": "\"Additionally\", \"running on a gateway\"",
+      "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "88a1eca1_18aa18b9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-29T17:12:42Z",
+      "side": 1,
+      "message": "\"and reads\". Put a . in the end.",
+      "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b1dd86ef_c5820f40",
+        "filename": "examples/client/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-29T17:12:42Z",
+      "side": 1,
+      "message": "Try to break the line with this guide line. Put \"configurations\" on the next line and put a . after it. Start the next line after the .",
+      "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "81793772_72238ec7",
+        "filename": "examples/client/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-29T17:12:42Z",
+      "side": 1,
+      "message": "Put an empty line after.",
+      "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bfdd12d9_76a42b89",
+        "filename": "examples/client/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-29T17:12:42Z",
+      "side": 1,
+      "message": "Put an empty line after.",
+      "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcda92ca_99ea63cd",
+        "filename": "examples/client/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-29T17:12:42Z",
+      "side": 1,
+      "message": "\"using the following options\"",
+      "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bfb26e68_e5e1c472",
+        "filename": "examples/client/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-29T17:12:42Z",
+      "side": 1,
+      "message": "\"run `cli.js` on a gateway you don\u0027t need to create `config/...`\"",
+      "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dd8b13f5_7fe6c01d",
+        "filename": "examples/client/cmds/getDevices.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-29T17:12:42Z",
+      "side": 1,
+      "message": "Can result come with .error or .Error?",
+      "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3157bc3a_899e2297",
+        "filename": "examples/client/config/default.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2017-12-29T17:12:42Z",
+      "side": 1,
+      "message": "JSON.parse can throw an exception (perhaps readFileSync as well). Put this in a try-catch and return defaultConfig if it fails.",
+      "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
