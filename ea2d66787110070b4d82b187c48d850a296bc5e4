@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b3ebc61b_be0d22dc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T17:38:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e8a10b8_e352a530",
+      "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f51f7dc6_0d4fdfe9",
         "filename": "/COMMIT_MSG",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2017-12-29T17:12:42Z",
       "side": 1,
       "message": "\"allows the user to create\"",
+      "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "534ea408_32edab4b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T17:38:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f51f7dc6_0d4fdfe9",
       "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "130d84a8_a7ed63d6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T17:38:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bcbf41ce_77e88edc",
+      "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1b76570_a71d8bd0",
         "filename": "/COMMIT_MSG",
         "patchSetId": 4
@@ -64,6 +118,24 @@
       "writtenOn": "2017-12-29T17:12:42Z",
       "side": 1,
       "message": "\"Additionally\", \"running on a gateway\"",
+      "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "458cd1d6_53206470",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T17:38:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1b76570_a71d8bd0",
       "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "adcd48df_b122a590",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T17:38:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88a1eca1_18aa18b9",
+      "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b1dd86ef_c5820f40",
         "filename": "examples/client/README.md",
         "patchSetId": 4
@@ -98,6 +188,24 @@
       "writtenOn": "2017-12-29T17:12:42Z",
       "side": 1,
       "message": "Try to break the line with this guide line. Put \"configurations\" on the next line and put a . after it. Start the next line after the .",
+      "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "283de2d4_b6c614d3",
+        "filename": "examples/client/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T17:38:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1dd86ef_c5820f40",
       "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "e154d36d_7be42a29",
+        "filename": "examples/client/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T17:38:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81793772_72238ec7",
+      "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bfdd12d9_76a42b89",
         "filename": "examples/client/README.md",
         "patchSetId": 4
@@ -132,6 +258,24 @@
       "writtenOn": "2017-12-29T17:12:42Z",
       "side": 1,
       "message": "Put an empty line after.",
+      "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de4eea0d_0195e20f",
+        "filename": "examples/client/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T17:38:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfdd12d9_76a42b89",
       "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "0519418b_397b7bfc",
+        "filename": "examples/client/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T17:38:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcda92ca_99ea63cd",
+      "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bfb26e68_e5e1c472",
         "filename": "examples/client/README.md",
         "patchSetId": 4
@@ -166,6 +328,24 @@
       "writtenOn": "2017-12-29T17:12:42Z",
       "side": 1,
       "message": "\"run `cli.js` on a gateway you don\u0027t need to create `config/...`\"",
+      "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e595ad5a_5537cf65",
+        "filename": "examples/client/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T17:38:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfb26e68_e5e1c472",
       "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "3dd15c9d_35ec8f4b",
+        "filename": "examples/client/cmds/getDevices.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T17:38:32Z",
+      "side": 1,
+      "message": "Yes. When the gateway is not connected (parent connection) and you use this command the return is coming with \u0027Error\u0027. I don\u0027t know if that is the better approach to fix this or change the route in parent connection to \u0027error\u0027",
+      "parentUuid": "dd8b13f5_7fe6c01d",
+      "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3157bc3a_899e2297",
         "filename": "examples/client/config/default.js",
         "patchSetId": 4
@@ -200,6 +398,24 @@
       "writtenOn": "2017-12-29T17:12:42Z",
       "side": 1,
       "message": "JSON.parse can throw an exception (perhaps readFileSync as well). Put this in a try-catch and return defaultConfig if it fails.",
+      "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df0f8898_b87587b5",
+        "filename": "examples/client/config/default.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2017-12-29T17:38:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3157bc3a_899e2297",
       "revId": "ea2d66787110070b4d82b187c48d850a296bc5e4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
