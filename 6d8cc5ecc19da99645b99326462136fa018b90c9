@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f30a812a_372a6ca2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-01-03T17:41:20Z",
+      "side": 1,
+      "message": "Break line on the guide (I think it is a 80 characters limit).",
+      "revId": "6d8cc5ecc19da99645b99326462136fa018b90c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d703a28f_75355fac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-01-03T17:41:20Z",
+      "side": 1,
+      "message": "\"is now showed\"",
+      "revId": "6d8cc5ecc19da99645b99326462136fa018b90c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "09a32cb5_ca6d25a1",
+        "filename": "examples/client/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-01-03T17:41:20Z",
+      "side": 1,
+      "message": "In this file:\n- Break line on the guide limit (I think it is a 80 columns limit).\n- Use single ` when the code is inline, e.g. \"In `knot-cloud-source/config.js` ...\"",
+      "revId": "6d8cc5ecc19da99645b99326462136fa018b90c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d056ef8d_a1b1d356",
+        "filename": "examples/client/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-01-03T17:41:20Z",
+      "side": 1,
+      "message": "Write addresses as code, i.e. write them around ``",
+      "revId": "6d8cc5ecc19da99645b99326462136fa018b90c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6c03edf5_4b3e2663",
+        "filename": "examples/client/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-01-03T17:41:20Z",
+      "side": 1,
+      "message": "I think this sentence can be simplified: \"In this request pass ...\". Could be \"In this request pass gateway as the device type and the user UUID returned in the previous step as the device owner\".\n\nThen you put an example of the JSON below, something like:\n\n```\n{\n  \"type\": \"gateway\",\n  \"owner\": \u003cuser UUID\u003e\n}\n```",
+      "revId": "6d8cc5ecc19da99645b99326462136fa018b90c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f18ec09a_7f64e2b0",
+        "filename": "examples/client/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-01-03T17:41:20Z",
+      "side": 1,
+      "message": "`uuid`, `token` and `knotCloudUuid`",
+      "revId": "6d8cc5ecc19da99645b99326462136fa018b90c9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
