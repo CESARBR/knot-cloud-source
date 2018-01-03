@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f655176_3fac6440",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-01-03T17:48:23Z",
+      "side": 1,
+      "message": "\"carries out\". Also could be simply \"subscribes\"",
+      "revId": "b8757f470e0ccc571549029179febbc934b962cc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43d99c05_2b53d3d2",
+        "filename": "examples/client/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-01-03T17:48:23Z",
+      "side": 1,
+      "message": "Break lines on the guide limit.",
+      "revId": "b8757f470e0ccc571549029179febbc934b962cc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "083b4eb0_1eed2dcd",
+        "filename": "examples/client/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-01-03T17:48:23Z",
+      "side": 1,
+      "message": "through/using the",
+      "revId": "b8757f470e0ccc571549029179febbc934b962cc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59af3612_4b624c3f",
+        "filename": "examples/client/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-01-03T17:48:23Z",
+      "side": 1,
+      "message": "`sent` to mark this is a option name.",
+      "range": {
+        "startLine": 101,
+        "startChar": 130,
+        "endLine": 101,
+        "endChar": 134
+      },
+      "revId": "b8757f470e0ccc571549029179febbc934b962cc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c8a6851a_ff5d5b35",
+        "filename": "examples/client/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-01-03T17:48:23Z",
+      "side": 1,
+      "message": "subscription types",
+      "range": {
+        "startLine": 101,
+        "startChar": 72,
+        "endLine": 101,
+        "endChar": 92
+      },
+      "revId": "b8757f470e0ccc571549029179febbc934b962cc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
