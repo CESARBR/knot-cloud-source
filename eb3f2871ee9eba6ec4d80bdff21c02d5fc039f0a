@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ef13b3e_9ed2e640",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-01-03T17:41:20Z",
+      "side": 1,
+      "message": "Break line in the guide (i believe it is a 80 characters limit)",
+      "revId": "eb3f2871ee9eba6ec4d80bdff21c02d5fc039f0a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
