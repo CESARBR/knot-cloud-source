@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2ad28ba4_00d2953d",
+        "filename": "examples/client/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-01-04T12:28:51Z",
+      "side": 1,
+      "message": "Remove the trailing white space here and below.",
+      "range": {
+        "startLine": 101,
+        "startChar": 71,
+        "endLine": 101,
+        "endChar": 72
+      },
+      "revId": "3ffd0718535b4a3c75ec7c8aa63dbe66153be0bf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
