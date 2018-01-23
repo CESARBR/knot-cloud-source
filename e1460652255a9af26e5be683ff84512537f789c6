@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7af0122f_4b52080c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1013169
+      },
+      "writtenOn": "2018-01-23T03:23:37Z",
+      "side": 1,
+      "message": "This commit message title looks confused for me, but the description message was clearer. \n\nI think it should be something like: Allow a clone device get its owned devices without request to a cloud.",
+      "revId": "e1460652255a9af26e5be683ff84512537f789c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee8e4213_76bd2bb0",
+        "filename": "lib/socketLogic.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1013169
+      },
+      "writtenOn": "2018-01-23T03:23:37Z",
+      "side": 1,
+      "message": "Long line.",
+      "revId": "e1460652255a9af26e5be683ff84512537f789c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
