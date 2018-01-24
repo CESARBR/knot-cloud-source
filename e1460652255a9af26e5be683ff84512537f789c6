@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aa4d4b61_f1d3038b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-01-24T19:46:19Z",
+      "side": 1,
+      "message": "Agree with Joao, we don\u0027t want to make this restriction you mention in this line, we want to make what is in the description below.\n\nA couple of corrections on Joao\u0027s suggestion: Allow a clone device to get its owned devices without requesting to a cloud",
+      "parentUuid": "7af0122f_4b52080c",
+      "revId": "e1460652255a9af26e5be683ff84512537f789c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee8e4213_76bd2bb0",
         "filename": "lib/socketLogic.js",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2018-01-23T03:23:37Z",
       "side": 1,
       "message": "Long line.",
+      "revId": "e1460652255a9af26e5be683ff84512537f789c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "47cce153_07ad6bb0",
+        "filename": "lib/socketLogic.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-01-24T19:46:19Z",
+      "side": 1,
+      "message": "`socket.skynetDevice` verification must come first. If `skynetDevice` doesn\u0027t exist, it will break.\n\nThis is assuming that when we connect as the user, we want to reach the cloud (or we are accessing the cloud). It isn\u0027t clear why we are restricting this query to the `user` type.\n\nWhat you are trying to do is \"if we are fog and I receive a `devices` request, return data from my db\". This should be explicit.\n\nAnother question is, every time the fog receives a `devices` request, should it respond through the `else` below or there are situation where I want to go in this if?",
+      "parentUuid": "ee8e4213_76bd2bb0",
       "revId": "e1460652255a9af26e5be683ff84512537f789c6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
