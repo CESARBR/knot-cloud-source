@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b985d417_95e0255b",
+        "filename": "lib/socketLogic.js",
+        "patchSetId": 5
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-01-24T18:01:09Z",
+      "side": 1,
+      "message": "Remove this merge conflict",
+      "revId": "7ba852b7a4921a1eb6056402388ebc84613de4c8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
