@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "f4ca3adb_90d37205",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-01-24T17:57:02Z",
+      "side": 1,
+      "message": "Try to be more descriptive in the commit header. What is the outcome of this patch? This is what should be here.\n\nWhen you write only \"fix something\" I need to look at the commit description or the code to understand what was broken and how it is going to work now. You can avoid me having to look into the commit if you say in the header how it is going to work now. If I want to understand, then I look at the details.",
+      "revId": "f4421b8501b30fd8ec0deb17cde633c6782d98a6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "48a55f39_28dafb8f",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
@@ -13,6 +30,30 @@
       "writtenOn": "2018-01-23T18:24:24Z",
       "side": 1,
       "message": "Break line on the guide, according to 50/72 commit message rule.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 76
+      },
+      "revId": "f4421b8501b30fd8ec0deb17cde633c6782d98a6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "887285a4_edb8be57",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-01-24T17:57:02Z",
+      "side": 1,
+      "message": "+1\n\nAlso put \".\" at the end of a sentence.",
+      "parentUuid": "48a55f39_28dafb8f",
       "range": {
         "startLine": 9,
         "startChar": 0,
