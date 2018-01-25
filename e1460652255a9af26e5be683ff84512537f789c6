@@ -69,6 +69,24 @@
       "revId": "e1460652255a9af26e5be683ff84512537f789c6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76b4bdbd_9cf5153f",
+        "filename": "lib/socketLogic.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2018-01-25T12:16:05Z",
+      "side": 1,
+      "message": "So it should be like:\nif (socket.skynetDevice){\n  if (data.gateways \u0026\u0026 knot.instanceType \u003d\u003d\u003d \u0027cloud\u0027 \u0026\u0026\n socket.skynetDevice.Uuid ) {\n    ....\n  }\n}...?\nAnd I think that the \u0027else\u0027 scope should run on fog. \nThe \u0027if\u0027 scope is using the lib `knotGatewayManager`. \nIf you see this lib, it is using socket to access the fog,\n assuming that you are running in the cloud.",
+      "parentUuid": "47cce153_07ad6bb0",
+      "revId": "e1460652255a9af26e5be683ff84512537f789c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
