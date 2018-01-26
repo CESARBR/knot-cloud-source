@@ -87,6 +87,24 @@
       "revId": "e1460652255a9af26e5be683ff84512537f789c6",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f24406cd_43059201",
+        "filename": "lib/socketLogic.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-01-26T22:09:58Z",
+      "side": 1,
+      "message": "About `socket.skynetDevice` coming first, it could be like you wrote, but as it was before was better:\n\n```\nif (data.gateways \u0026\u0026 socket.skynetDevice \u0026\u0026 socket.skynetDevice.Uuid)\n```\n\nI meant that the socket.skynetDevice verification should come before accessing one of its properties, otherwise it might break the program.\n\nThe other condition, `knot.instanceType \u003d\u003d\u003d \u0027cloud\u0027` is enough to solve the problem? If so, it is clearer what is happening. Then it could be:\n\n```\nif (knotInstanceType \u003d\u003d\u003d \u0027cloud\u0027 \u0026\u0026 data.gateways \u0026\u0026 socket.skynetDevice \u0026\u0026 socket.skynetDevice.Uuid)\n```\n\nBut you are saying that the if should run always on cloud and the else always on fog, right? If this is true, then the proper solution would be:\n```\nif (knotInstanceType \u003d\u003d\u003d \u0027cloud\u0027) {\n  if (data.gateways \u0026\u0026 socket.skynetDevice \u0026\u0026 socket.skynetDevice.Uuid)\n    ...\n} else {\n  // fog\n}\n```\n\nBut what happens if `data.gateways \u0026\u0026 socket.skynetDevice \u0026\u0026 socket.skynetDevice.Uuid` is false? It is answering correctly the request made to the cloud? Or should we execute the else in this case?",
+      "parentUuid": "76b4bdbd_9cf5153f",
+      "revId": "e1460652255a9af26e5be683ff84512537f789c6",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
