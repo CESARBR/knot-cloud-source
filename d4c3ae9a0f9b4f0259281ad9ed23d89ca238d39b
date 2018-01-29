@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "846aaa38_679a281f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-01-29T17:39:47Z",
+      "side": 1,
+      "message": "This description is a little bit confusing. What do you want to say here? Should it be devices instead of credentials?\n\nMind the missing ending \".\".",
+      "revId": "d4c3ae9a0f9b4f0259281ad9ed23d89ca238d39b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
