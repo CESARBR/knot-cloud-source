@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f12c037a_bcfd1df7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-03-22T23:29:09Z",
+      "side": 1,
+      "message": "What is your patch really doing? Adding an environment variable or using it?\n\nHere you can either put the actual environment variable name on the title or describe in the message.",
+      "revId": "4b88606f0cc51e8decab440530f3aac57fd768ea",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
