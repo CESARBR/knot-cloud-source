@@ -67,7 +67,7 @@ module.exports = {
   },
   uuid: process.env.UUID,
   token: process.env.TOKEN || 'my_default_token',
-  knotInstanceType: "cloud", //gateway
+  knotInstanceType: process.env.KNOT_INSTANCE_TYPE || "cloud", //gateway
   broadcastActivity: (process.env.BROADCAST_ACTIVITY || "false").toLowerCase() == "true",
   log: (process.env.USE_LOG || "true").toLowerCase() == "true",
   logToRedis: (process.env.USE_REDIS_LOG || "false").toLowerCase() == "true",
