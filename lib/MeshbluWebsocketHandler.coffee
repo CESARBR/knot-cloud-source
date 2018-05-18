@@ -19,6 +19,7 @@ class MeshbluWebsocketHandler extends EventEmitter
     @meshbluEventEmitter = dependencies.meshbluEventEmitter
     @updateIfAuthorized = dependencies.updateIfAuthorized ? require './updateIfAuthorized'
     @throttles = dependencies.throttles ? require './getThrottles'
+    @saveDataIfAuthorized = dependencies.saveDataIfAuthorized ? require './saveDataIfAuthorized'
 
   initialize: (@socket, request) =>
     @socket.id = uuid.v4()
@@ -147,6 +148,13 @@ class MeshbluWebsocketHandler extends EventEmitter
     @log 'devices', null, request: {uuid: @uuid}, fromUuid: @uuid
     @sendFrame 'whoami', @authedDevice
 
+  data: (data) =>
+    debug 'data', data
+    @saveDataIfAuthorized @sendMessage, @authedDevice, data.uuid, data, (error) =>
+      @log 'data', error?, request: data, fromUuid: @authedDevice.uuid, error: (error?.message ? error?undefined)
+      return @sendError error.message, ['data', data] if error?
+      @sendFrame 'data', {request: data, fromUuid: @authedDevice.uuid}
+
   # internal methods
   addListeners: =>
     @addListener 'device', @device
@@ -161,6 +169,7 @@ class MeshbluWebsocketHandler extends EventEmitter
     @addListener 'unsubscribe', @unsubscribe
     @addListener 'unregister', @unregister
     @addListener 'whoami', @whoami
+    @addListener 'data', @data
 
   log: (event, didError, data) =>
     @meshbluEventEmitter.log event, didError, data
