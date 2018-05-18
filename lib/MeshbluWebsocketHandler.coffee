@@ -20,6 +20,7 @@ class MeshbluWebsocketHandler extends EventEmitter
     @updateIfAuthorized = dependencies.updateIfAuthorized ? require './updateIfAuthorized'
     @throttles = dependencies.throttles ? require './getThrottles'
     @saveDataIfAuthorized = dependencies.saveDataIfAuthorized ? require './saveDataIfAuthorized'
+    @knotParentConnection = dependencies.knotParentConnection ? require './knotParentConnection'
 
   initialize: (@socket, request) =>
     @socket.id = uuid.v4()
@@ -154,6 +155,11 @@ class MeshbluWebsocketHandler extends EventEmitter
       @log 'data', error?, request: data, fromUuid: @authedDevice.uuid, error: (error?.message ? error?undefined)
       return @sendError error.message, ['data', data] if error?
       @sendFrame 'data', {request: data, fromUuid: @authedDevice.uuid}
+      if @knotParentConnection.getParentConnection()?
+        @knotParentConnection.buildParentData @authedDevice, config, data, (parentData) =>
+          debug 'syncData', parentData
+          parentConnectionSocket.getParentConnection()?.socket
+          parentConnectionSocket?.emit 'data', parentData
 
   # internal methods
   addListeners: =>
