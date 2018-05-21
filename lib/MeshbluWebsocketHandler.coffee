@@ -2,6 +2,7 @@ _ = require 'lodash'
 config = require '../config'
 debug = require('debug')('meshblu:meshblu-websocket-handler')
 {EventEmitter} = require 'events'
+Device = require './models/device'
 uuid = require 'node-uuid'
 
 class MeshbluWebsocketHandler extends EventEmitter
@@ -200,12 +201,19 @@ class MeshbluWebsocketHandler extends EventEmitter
       callback()
 
   setOnlineStatus: (device, online) =>
+    deviceDb = new Device(device)
+
     message =
       devices: '*',
       topic: 'device-status',
       payload:
         online: online
+
     @sendMessage device, message
+
+    deviceDb.update {$set: {online: online}}, (error) =>
+      return @sendError error.message, device if error?
+      debug 'device status updated', device.uuid
 
   sendFrame: (type, data) =>
     frame = [type, data]
