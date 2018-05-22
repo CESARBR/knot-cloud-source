@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "40cd7591_36a6d5af",
+        "filename": "lib/MeshbluWebsocketHandler.coffee",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2018-05-22T12:31:50Z",
+      "side": 1,
+      "message": "The meshblu already have methods that abstract the use of `model/device`. You can take a look in the file `lib/knotUpdateSocketLogic.js` and in `lib/updatePresence.js`.\nThey are used in the handler of socketio in the file `lib/socketLogic.js` on events `\u0027identity\u0027` and `\u0027disconnect\u0027`.",
+      "range": {
+        "startLine": 189,
+        "startChar": 4,
+        "endLine": 189,
+        "endChar": 33
+      },
+      "revId": "07b788fbcee78993c00b7d8bf2e8f24e33a7fc7f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
