@@ -13,7 +13,7 @@ class MeshbluWebsocketHandler extends EventEmitter
     @getDevice = dependencies.getDevice ? require './getDevice'
     @getDeviceIfAuthorized = dependencies.getDeviceIfAuthorized ? require './getDeviceIfAuthorized'
     @getDevices = dependencies.getDevices ? require './getDevices'
-    @registerDevice = dependencies.registerDevice ? require './register'
+    @registerDevice = dependencies.registerDevice ? require './KnotRegister'
     @unregisterDevice = dependencies.unregisterDevice ? require './unregister'
     @sendMessage = dependencies.sendMessage
     @meshbluEventEmitter = dependencies.meshbluEventEmitter
@@ -21,6 +21,7 @@ class MeshbluWebsocketHandler extends EventEmitter
     @throttles = dependencies.throttles ? require './getThrottles'
     @saveDataIfAuthorized = dependencies.saveDataIfAuthorized ? require './saveDataIfAuthorized'
     @knotParentConnection = dependencies.knotParentConnection ? require './knotParentConnection'
+    @knotDeviceManager = dependencies.knotDeviceManager ? require './knotDeviceManager'
 
   initialize: (@socket, request) =>
     @socket.id = uuid.v4()
@@ -111,10 +112,12 @@ class MeshbluWebsocketHandler extends EventEmitter
 
   register: (data) =>
     debug 'register', data
-    @registerDevice data, (error, device) =>
-      @log 'register', error?, request: data, fromUuid: @uuid, error: error?.message
-      return @sendError error.message, ['register', data] if error?
-      @sendFrame 'registered', device
+    @knotDeviceManager.createUUID (uuidCreated) =>
+      @registerDevice(data, (error, device) =>
+        @log 'register', error?, request: data, fromUuid: @uuid, error: error?.message
+        return @sendError error.message, ['register', data] if error?
+        @sendFrame 'registered', device
+      , {uuid: uuidCreated})
 
   status: =>
     @getSystemStatus (status) =>
