@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63003746_bb6e9116",
+        "filename": "examples/client/cmds/subscribeDevice.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-05-22T21:05:00Z",
+      "side": 1,
+      "message": "Add one line before this require",
+      "revId": "e9b53c3d7026bcf185c989f15e90f47b6fb44ca9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0726db8_95b935ca",
+        "filename": "examples/client/cmds/subscribeDevice.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-05-22T21:05:00Z",
+      "side": 1,
+      "message": "Use spaces",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 1
+      },
+      "revId": "e9b53c3d7026bcf185c989f15e90f47b6fb44ca9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
