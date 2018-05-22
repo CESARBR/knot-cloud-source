@@ -22,6 +22,30 @@
       "revId": "07b788fbcee78993c00b7d8bf2e8f24e33a7fc7f",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be260567_c12f1860",
+        "filename": "lib/MeshbluWebsocketHandler.coffee",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1013169
+      },
+      "writtenOn": "2018-05-22T13:14:15Z",
+      "side": 1,
+      "message": "Yes, I saw that methods but I had trouble using them. It isn\u0027t clear how the status is updated on `identity` event in the `lib/socketLogic.js` (I didn\u0027t find this file you mentioned `lib/knotUpdateSocketLogic.js`). \n\nAnd in the case of `disconnect` event, it uses the `lib/updatePresence.js`, but this method only updates the status to false.\n\nI thought about using the `lib/updatePresence.js` as the abstraction, but the query `devices.findOne({socketid: socket})` never found matchs when I use it passing websocket id. So, as these implementations are punctual changes, I just uses the `setOnlineStatus` method as MeshbluWebsocketHandler abstraction to update the status in database (using it in both `identity` and `disconnect` events).",
+      "parentUuid": "40cd7591_36a6d5af",
+      "range": {
+        "startLine": 189,
+        "startChar": 4,
+        "endLine": 189,
+        "endChar": 33
+      },
+      "revId": "07b788fbcee78993c00b7d8bf2e8f24e33a7fc7f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
