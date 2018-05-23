@@ -22,6 +22,30 @@
       "revId": "235e062b84d7006cd26fe7bd7aea352c9525ed0d",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8f1fb7c5_33279370",
+        "filename": "lib/MeshbluWebsocketHandler.coffee",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-05-23T19:46:53Z",
+      "side": 1,
+      "message": "Not without creating another function, I guess. Is there a problem with this approach?",
+      "parentUuid": "74ef520d_08e38d07",
+      "range": {
+        "startLine": 120,
+        "startChar": 6,
+        "endLine": 120,
+        "endChar": 28
+      },
+      "revId": "235e062b84d7006cd26fe7bd7aea352c9525ed0d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
