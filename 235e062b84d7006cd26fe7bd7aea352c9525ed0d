@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "74ef520d_08e38d07",
+        "filename": "lib/MeshbluWebsocketHandler.coffee",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2018-05-23T13:30:16Z",
+      "side": 1,
+      "message": "Is there a way to pass this argument before the callback?\nIn this function `registerDevice` the callback is not the last parameter",
+      "range": {
+        "startLine": 120,
+        "startChar": 6,
+        "endLine": 120,
+        "endChar": 28
+      },
+      "revId": "235e062b84d7006cd26fe7bd7aea352c9525ed0d",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
