@@ -48,6 +48,7 @@
     "socket.io-redis": "^0.1.4",
     "splunk-sdk": "^1.7.1",
     "uuid": "^2.0.1",
+    "uuid-validate": "0.0.3",
     "when": "~3.4.4",
     "winston": "^0.8.3",
     "winston-elasticsearch": "^0.1.1",
