@@ -2,6 +2,7 @@ _      = require 'lodash'
 async  = require 'async'
 bcrypt = require 'bcrypt'
 crypto = require 'crypto'
+validate = require 'uuid-validate'
 debug  = require('debug')('meshblu:model:device')
 UUIDAliasResolver = require '../../src/uuid-alias-resolver'
 Publisher = require '../Publisher'
@@ -271,7 +272,7 @@ class Device
   _hashToken: (token, callback) =>
     @_lookupAlias @uuid, (error, uuid) =>
       return callback error if error?
-      return callback new Error 'Invalid Device UUID' unless uuid?
+      return callback new Error 'Invalid Device UUID' unless validate uuid
 
       hasher = crypto.createHash 'sha256'
       hasher.update token
