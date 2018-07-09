@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a6e30247_0167cbc5",
+        "filename": "config.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-07-09T16:17:45Z",
+      "side": 1,
+      "message": "I\u0027m afraid that `owner` can confuse with the device\u0027s owner. What about something like \"runAs\"?",
+      "range": {
+        "startLine": 130,
+        "startChar": 2,
+        "endLine": 130,
+        "endChar": 7
+      },
+      "revId": "609406179f8eae7de47bdb9b31fe7bbcf2d56985",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "71f527c1_8878bc8f",
+        "filename": "config.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1013086
+      },
+      "writtenOn": "2018-07-09T16:17:45Z",
+      "side": 1,
+      "message": "Keep the two spaces indentation",
+      "range": {
+        "startLine": 131,
+        "startChar": 2,
+        "endLine": 131,
+        "endChar": 8
+      },
+      "revId": "609406179f8eae7de47bdb9b31fe7bbcf2d56985",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
