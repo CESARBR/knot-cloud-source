@@ -51,6 +51,14 @@ console.log("                 sss                              ");
 console.log('\Meshblu (formerly skynet.im) %s environment loaded... ', program.environment);
 console.log("");
 
+if (process.env.NODE_ENV === 'production' && config.knotInstanceType === 'gateway') {
+  /* Run server process as a special user */
+  process.setgid(config.runAs.group);
+  process.setuid(config.runAs.user);
+
+  console.log('Meshblu server is now running as a special user');
+}
+
 if (process.env.AIRBRAKE_KEY) {
   var airbrakeErrors = require("./lib/airbrakeErrors");
   airbrakeErrors.handleExceptions()
