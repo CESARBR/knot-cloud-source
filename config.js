@@ -119,19 +119,22 @@ module.exports = {
     uri: aliasServerUri
   },
   skynet_override_token: process.env.OVERRIDE_TOKEN,
-  useProxyProtocol: (process.env.USE_PROXY_PROTOCOL || "false").toLowerCase() == "true"
-   ,
- parentConnection: {
-   uuid: process.env.PARENT_CONNECTION_UUID,
-   token: process.env.PARENT_CONNECTION_TOKEN,
-   server: process.env.PARENT_CONNECTION_SERVER,
-   port: parseInt(process.env.PARENT_CONNECTION_PORT),
-   knotCloudUuid: process.env.UUID
- },
- messageBus: {
-   port: parseInt(process.env.MESSAGE_BUS_PORT || 7777)
- },
- preservedDeviceProperties: ['geo', 'ipAddress', 'lastOnline', 'onlineSince', 'owner', 'timestamp'],
- privateKey: privateKey,
- publicKey: publicKey
+  useProxyProtocol: (process.env.USE_PROXY_PROTOCOL || "false").toLowerCase() == "true",
+  parentConnection: {
+    uuid: process.env.PARENT_CONNECTION_UUID,
+    token: process.env.PARENT_CONNECTION_TOKEN,
+    server: process.env.PARENT_CONNECTION_SERVER,
+    port: parseInt(process.env.PARENT_CONNECTION_PORT),
+    knotCloudUuid: process.env.UUID
+  },
+  owner: {
+        user: 'knot',
+        group: 'knot'
+  },
+  messageBus: {
+    port: parseInt(process.env.MESSAGE_BUS_PORT || 7777)
+  },
+  preservedDeviceProperties: ['geo', 'ipAddress', 'lastOnline', 'onlineSince', 'owner', 'timestamp'],
+  privateKey: privateKey,
+  publicKey: publicKey
 };
