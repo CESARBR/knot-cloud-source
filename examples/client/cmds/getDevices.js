@@ -28,18 +28,21 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies
         conn.devices({
           gateways: ['*'],
         }, (result) => {
-          if (result.error || result.Error) {
+          if (result.error) {
             console.log(result);
-          } else {
-            for (let i = 0; i < result.length; i += 1) {
-              console.log(`Device: ${i}`);
-              console.log(`Name: ${JSON.stringify(result[i].name, null, 2)}`);
-              console.log(`Type: ${JSON.stringify(result[i].type, null, 2)}`);
-              console.log(`UUID: ${JSON.stringify(result[i].uuid, null, 2)}`);
-              console.log(`Online: ${JSON.stringify(result[i].online, null, 2)}`);
-              console.log();
-            }
+            return;
           }
+
+          const devices = result;
+          for (let i = 0; i < devices.length; i += 1) {
+            console.log(`Device: ${i}`);
+            console.log(`Name: ${JSON.stringify(devices[i].name, null, 2)}`);
+            console.log(`Type: ${JSON.stringify(devices[i].type, null, 2)}`);
+            console.log(`UUID: ${JSON.stringify(devices[i].uuid, null, 2)}`);
+            console.log(`Online: ${JSON.stringify(devices[i].online, null, 2)}`);
+            console.log();
+          }
+
           conn.close(() => {});
         });
       });
