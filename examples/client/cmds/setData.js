@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 const meshblu = require('meshblu');
 const config = require('config'); // eslint-disable-line import/no-extraneous-dependencies
+const isBase64 = require('is-base64'); // eslint-disable-line import/no-extraneous-dependencies
 
 require('yargs') // eslint-disable-line import/no-extraneous-dependencies
   .command({
@@ -10,9 +11,31 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies
       yargs
         .option('token', {
           alias: 't',
-          describe: 'owner token',
+          describe: 'Owner token',
           demandOption: !config.has('cloud.token'),
           default: config.has('cloud.token') ? config.get('cloud.token') : undefined,
+        })
+        .positional('thing_uuid', {
+          describe: 'Thing UUID',
+        })
+        .positional('sensor_id', {
+          describe: 'ID of the sensor to be updated',
+        })
+        .positional('sensor_value', {
+          describe: 'Value to set the sensor to. Supported types: boolean, number or Base64 strings',
+          coerce: (value) => {
+            if (isNaN(value)) { // eslint-disable-line no-restricted-globals
+              if (value === 'true' || value === 'false') {
+                return (value === 'true');
+              }
+              if (!isBase64(value)) {
+                throw new Error('Supported types are boolean, number or Base64 strings');
+              }
+              return value;
+            }
+
+            return parseFloat(value);
+          },
         });
     },
     handler: (argv) => {
@@ -29,7 +52,7 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies
           uuid: argv.thing_uuid,
           set_data: [{
             sensor_id: argv.sensor_id,
-            value: !isNaN(argv.sensor_value) ? parseFloat(argv.sensor_value) : ((argv.sensor_value === 'true') || false), // eslint-disable-line no-restricted-globals
+            value: argv.sensor_value,
           }],
         }, (result) => {
           console.log(`Name: ${JSON.stringify(result.name, null, 2)}`);
