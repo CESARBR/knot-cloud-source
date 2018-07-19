@@ -23,6 +23,7 @@
     "express-meshblu-healthcheck": "^1.0.1",
     "fakeredis": "^0.3.4",
     "faye-websocket": "^0.9.4",
+    "is-base64": "0.0.5",
     "jsep": "0.3.0",
     "jsonschema": "^1.1.1",
     "limitus": "^1.0.3",
