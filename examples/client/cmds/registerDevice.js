@@ -3,7 +3,7 @@ const http = require('http');
 
 require('yargs') // eslint-disable-line import/no-extraneous-dependencies
   .command({
-    command: 'register <thing_name>',
+    command: 'register <thing_name> <thing_id>',
     desc: 'Register a new device on cloud/fog',
     handler: (argv) => {
       const options = {
@@ -19,6 +19,7 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies
         owner: argv.uuid,
         name: argv.thing_name,
         type: 'KNOTDevice',
+        id: argv.thing_id,
       };
       const req = http.request(options, (res) => {
         let rawData = '';
@@ -36,6 +37,7 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies
             thingData = JSON.parse(rawData);
             console.log(`Name: ${thingData.name}`);
             console.log(`Type: ${thingData.type}`);
+            console.log(`ID: ${thingData.id}`);
             console.log(`UUID: ${thingData.uuid}`);
             console.log(`Owner: ${thingData.owner}`);
             console.log(`Token: ${thingData.token}`);

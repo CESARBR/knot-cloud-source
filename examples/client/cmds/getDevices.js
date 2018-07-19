@@ -38,7 +38,7 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies
             console.log(`Device: ${i}`);
             console.log(`Name: ${JSON.stringify(devices[i].name, null, 2)}`);
             console.log(`Type: ${JSON.stringify(devices[i].type, null, 2)}`);
-            console.log(`UUID: ${JSON.stringify(devices[i].uuid, null, 2)}`);
+            console.log(`ID: ${JSON.stringify(devices[i].id, null, 2)}`);
             console.log(`Online: ${JSON.stringify(devices[i].online, null, 2)}`);
             console.log();
           }
