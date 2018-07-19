@@ -59,6 +59,7 @@ require('yargs') // eslint-disable-line import/no-extraneous-dependencies
           console.log('update config: ');
           console.log(`Name: ${JSON.stringify(result.name, null, 2)}`);
           console.log(`Type: ${JSON.stringify(result.type, null, 2)}`);
+          console.log(`ID: ${JSON.stringify(result.id, null, 2)}`);
           console.log(`UUID: ${JSON.stringify(result.uuid, null, 2)}`);
           console.log(`Online: ${JSON.stringify(result.online, null, 2)}`);
           console.log(`Config: ${JSON.stringify(result.config, null, 2)}`);
