@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "749a081d_a2f8360c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1013096
+      },
+      "writtenOn": "2018-08-27T19:58:06Z",
+      "side": 1,
+      "message": "Comment where you changed the code. You made this change at cli. So I\u0027d put something like: `Add UUID log message at cli command getDevices` or `Show UUID when run cli devices`",
+      "range": {
+        "startLine": 7,
+        "startChar": 23,
+        "endLine": 7,
+        "endChar": 34
+      },
+      "revId": "7bdea977abad6917f2061563b07317523b089288",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
