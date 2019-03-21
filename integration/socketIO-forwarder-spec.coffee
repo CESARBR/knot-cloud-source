@@ -1,6 +1,6 @@
 _ = require 'lodash'
 path = require 'path'
-meshblu = require 'meshblu'
+meshblu = require '@cesarbr/meshblu'
 MeshbluHTTP = require 'meshblu-http'
 MeshbluSocketIO = require 'meshblu-socket.io'
 MeshbluConfig = require 'meshblu-config'

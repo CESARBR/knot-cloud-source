@@ -1,6 +1,6 @@
 _ = require 'lodash'
 path = require 'path'
-meshblu = require 'meshblu'
+meshblu = require '@cesarbr/meshblu'
 MeshbluConfig = require 'meshblu-config'
 
 describe 'SocketLogic Forwarder Events', ->

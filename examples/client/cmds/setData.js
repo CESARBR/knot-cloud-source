@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-const meshblu = require('meshblu');
+const meshblu = require('@cesarbr/meshblu');
 const config = require('config'); // eslint-disable-line import/no-extraneous-dependencies
 const isBase64 = require('is-base64'); // eslint-disable-line import/no-extraneous-dependencies
 

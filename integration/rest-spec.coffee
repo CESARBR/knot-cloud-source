@@ -3,7 +3,7 @@ path = require 'path'
 url = require 'url'
 MeshbluHTTP = require 'meshblu-http'
 MeshbluConfig = require 'meshblu-config'
-meshblu = require 'meshblu'
+meshblu = require '@cesarbr/meshblu'
 request = require 'request'
 
 describe 'REST', ->

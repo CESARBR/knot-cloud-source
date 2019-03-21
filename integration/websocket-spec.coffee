@@ -4,7 +4,7 @@ debug = require('debug')('meshblu:integration:websocket')
 MeshbluConfig = require 'meshblu-config'
 MeshbluHTTP = require 'meshblu-http'
 MeshbluWebsocket = require 'meshblu-websocket'
-MeshbluSocketLogic = require 'meshblu'
+MeshbluSocketLogic = require '@cesarbr/meshblu'
 
 describe 'WebSocket Events', ->
   before (done) ->
