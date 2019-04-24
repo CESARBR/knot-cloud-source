@@ -57,7 +57,7 @@ if (process.env.ALIAS_SERVER_URI && process.env.ALIAS_SERVER_URI !== '') {
 
 module.exports = {
   mongo: {
-    databaseUrl: process.env.MONGODB_URI
+    databaseUrl: process.env.MONGODB_URI || 'mongodb://localhost:27017/knot_cloud'
   },
   port: parseInt(process.env.PORT) || 3000,
   tls: {
